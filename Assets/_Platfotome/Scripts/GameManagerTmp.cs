@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Platfotome.GUI;
+using UnityEngine;
 
 namespace Platfotome {
 
@@ -6,7 +7,8 @@ namespace Platfotome {
 
         private void Awake() {
 
-            ScriptableDictionaryLibrary.LoadAllDictionaries(showOuput: false);
+            ScriptableDictionaryLibrary.LoadAllDictionaries(showOutput: false);
+            DialogueManager.Init(showOutput: true);
 
         }
 
