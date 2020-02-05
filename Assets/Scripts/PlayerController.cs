@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-    [SerializeField] float speed = 5;
+public class PlayerController : MonoBehaviour {
+    [SerializeField] float walkSpeed = 4;
+    [SerializeField] float runSpeed = 7;
     [SerializeField] float jump = 3;
     [SerializeField] float jumpTime = 0.5f;
     [SerializeField] float acceleration = 10;
@@ -19,69 +19,61 @@ public class PlayerController : MonoBehaviour
     float horizontal = 0;
     float axis = 0;
 
-    void Awake()
-    {
+    void Awake() {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
 
-    void Update()
-    {
-        if (Input.GetButtonDown("Jump") && isGrounded())
-        {
+    void Update() {
+        if (Input.GetButtonDown("Jump") && isGrounded()) {
             jumping = true;
             holdTime = jumpTime;
-        }
-        else if (Input.GetButton("Jump") && holdTime > 0)
-        {
+        } else if (Input.GetButton("Jump") && holdTime > 0) {
             holdTime -= Time.deltaTime;
-        }
-        else
-        {
+        } else {
             jumping = false;
             holdTime = 0;
         }
 
         axis = Input.GetAxisRaw("Horizontal");
 
-        if (horizontal * axis < 0 && Mathf.Abs(horizontal) > 0.2f && isGrounded())
-        {
+        if (horizontal * axis < 0 && Mathf.Abs(horizontal) > 0.2f && isGrounded()) {
             horizontal = 0;
         }
 
-        if (axis != 0)
-        {
-            horizontal = Mathf.MoveTowards(horizontal, axis * speed, acceleration * Time.deltaTime);
+        if (axis != 0) {
+            if (Input.GetButton("Fire1")) {
+                if (isGrounded()) {
+                    horizontal = Mathf.MoveTowards(horizontal, axis * runSpeed, acceleration * Time.deltaTime);
+                } else if (Mathf.Abs(horizontal) < walkSpeed) {
+                    horizontal = Mathf.MoveTowards(horizontal, axis * walkSpeed, acceleration * Time.deltaTime);
+                }
+            } else {
+                horizontal = Mathf.MoveTowards(horizontal, axis * walkSpeed, acceleration * Time.deltaTime);
+            }
         }
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         Vector2 velocity = rb.velocity;
         velocity.x = horizontal;
 
-        if (axis == 0)
-        {
-            if (Mathf.Abs(horizontal) > 0.2f)
-            {
+        if (axis == 0) {
+            if (Mathf.Abs(horizontal) > 0.2f) {
                 horizontal *= decelerationFactor;
-            }
-            else
-            {
+            } else {
                 horizontal = 0;
             }
         }
 
-        if (jumping)
-        {
+        if (jumping) {
             velocity.y = 5;
         }
 
         rb.velocity = velocity;
     }
 
-    public bool isGrounded()
-    {
+    public bool isGrounded() {
         RaycastHit2D hit = Physics2D.BoxCast(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x, 0.01f), 0, Vector2.down, 0.01f, groundCheckLayers.value);
         return hit.transform != null;
     }
