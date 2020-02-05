@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed = 3;
+    [SerializeField] float speed = 5;
     [SerializeField] float jump = 3;
     [SerializeField] float jumpTime = 0.5f;
+    [SerializeField] float acceleration = 10;
+    [SerializeField] float decelerationFactor = 0.85f;
+    [SerializeField] LayerMask groundCheckLayers = 1 << 8;
 
     Rigidbody2D rb = null;
     Collider2D col = null;
@@ -14,6 +17,7 @@ public class PlayerController : MonoBehaviour
     bool jumping = false;
     float holdTime = 0;
     float horizontal = 0;
+    float axis = 0;
 
     void Awake()
     {
@@ -38,13 +42,35 @@ public class PlayerController : MonoBehaviour
             holdTime = 0;
         }
 
-        horizontal = Input.GetAxis("Horizontal");
+        axis = Input.GetAxisRaw("Horizontal");
+
+        if (horizontal * axis < 0 && Mathf.Abs(horizontal) > 0.2f && isGrounded())
+        {
+            horizontal = 0;
+        }
+
+        if (axis != 0)
+        {
+            horizontal = Mathf.MoveTowards(horizontal, axis * speed, acceleration * Time.deltaTime);
+        }
     }
 
     void FixedUpdate()
     {
         Vector2 velocity = rb.velocity;
-        velocity.x = horizontal * speed;
+        velocity.x = horizontal;
+
+        if (axis == 0)
+        {
+            if (Mathf.Abs(horizontal) > 0.2f)
+            {
+                horizontal *= decelerationFactor;
+            }
+            else
+            {
+                horizontal = 0;
+            }
+        }
 
         if (jumping)
         {
@@ -56,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(new Vector2(col.bounds.center.x, col.bounds.center.y), new Vector2(col.bounds.size.x, 0.01f), 0, Vector2.down, 0.01f);
+        RaycastHit2D hit = Physics2D.BoxCast(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x, 0.01f), 0, Vector2.down, 0.01f, groundCheckLayers.value);
         return hit.transform != null;
     }
 }

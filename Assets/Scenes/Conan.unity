@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 885642933}
   - component: {fileID: 885642932}
   - component: {fileID: 885642931}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 2008915523}
   - component: {fileID: 2008915522}
   - component: {fileID: 2008915526}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: New Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3f74d2aff972a4b886079d6c3e0dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   jump: 3
   jumpTime: 0.5
-  groundCheck: {fileID: 0}
+  acceleration: 10
+  decelerationFactor: 0.85
+  groundCheckLayers:
+    serializedVersion: 2
+    m_Bits: 256
