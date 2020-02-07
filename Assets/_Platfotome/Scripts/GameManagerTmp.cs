@@ -7,8 +7,7 @@ namespace Platfotome {
 
         private void Awake() {
 
-            ScriptableDictionaryLibrary.LoadAllDictionaries(showOutput: false);
-            DialogueManager.Init(showOutput: true);
+            SystemsInitializer.Initialize();
 
         }
 

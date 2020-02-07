@@ -19,7 +19,7 @@ namespace Platfotome.GUI {
 		/// <summary>
 		/// Call exactly once during game load to initalize all dialogue data.
 		/// </summary>
-		public static void Init(bool showOutput = false) {
+		public static void Initialize(bool showOutput = false) {
 
 			foreach (var item in Resources.LoadAll<DialogueSequence>("Dialogue")) {
 				if (!dialogue.ContainsKey(item.name)) {
@@ -30,7 +30,9 @@ namespace Platfotome.GUI {
 			}
 
 			try {
-				references = GameObject.FindWithTag("GUI VN References").GetComponent<VisualNovelContainerReferences>();
+				var canvas = GameObject.FindWithTag("MainCanvas");
+				var prefab = Resources.Load<GameObject>("GUI/Visual Novel");
+				references = UnityEngine.Object.Instantiate(prefab, canvas.transform).GetComponent<VisualNovelContainerReferences>();
 				Initialized = true;
 			} catch (NullReferenceException) {
 				Debug.LogError(Prefix + " Failed to find Visual Novel References script. <b>Dialogue cannot be loaded.</b>");

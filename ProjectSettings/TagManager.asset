@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - GUI VN References
+  - MainCanvas
+  - TransitionCanvas
   layers:
   - Default
   - TransparentFX
