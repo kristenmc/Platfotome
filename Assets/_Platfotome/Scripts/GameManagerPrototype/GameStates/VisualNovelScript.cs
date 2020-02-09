@@ -13,39 +13,41 @@ namespace Platfotome {
 		private void Awake() {
 			DialogueManager.DialogueScript = dialogueScript;
 			DialogueManager.ChoiceScript = choiceScript;
-			if (GameManager.StateArgs.TryGetValue("key", out string key)) {
+
+			if (GameManager.StateArgs.TryGetValue(VisualNovelState.DialogueKey, out string key)) {
 				DialogueManager.LoadDialogue(key);
 			}
 		}
 
 		private void Loaded() {
-			DialogueManager.BeginReveal();
+			dialogueScript.BeginReveal();
 		}
 
 		private void Update() {
+			
+			if (!GameManager.Paused) {
 
-			// Must update dialogue choice first to prevent instant selection of first choice.
-			if (DialogueManager.ChoiceActive) {
+				if (DialogueManager.DialogueActive) {
 
-				if (Input.GetKeyDown(KeyCode.UpArrow)) {
-					DialogueManager.ChoiceUp();
+					if (Input.GetButtonDown(Constants.Keys.AdvanceDialogue)) { 
+						dialogueScript.AdvanceText();
+					} else if (Input.GetButtonDown(Constants.Keys.SkipDialogue)) {
+						dialogueScript.SkipToEnd();
+					}
+					return; // Don't allow instant selection / skip of text from immediate transition.
+
 				}
-				if (Input.GetKeyDown(KeyCode.DownArrow)) {
-					DialogueManager.ChoiceDown();
-				}
-				if (Input.GetButtonDown(Constants.Keys.ChooseDialogueChoice)) {
-					DialogueManager.SelectCurrentChoice();
-				}
 
-			}
+				if (DialogueManager.ChoiceActive) {
 
-			if (DialogueManager.DialogueActive) {
+					if (Input.GetKeyDown(KeyCode.UpArrow)) {
+						choiceScript.ChoiceUp();
+					} else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+						choiceScript.ChoiceDown();
+					} else if (Input.GetButtonDown(Constants.Keys.ChooseDialogueChoice)) {
+						choiceScript.SelectCurrent();
+					}
 
-				if (Input.GetButtonDown(Constants.Keys.AdvanceDialogue)) { 
-					DialogueManager.AdvanceDialogue();
-				}
-				if (Input.GetButtonDown(Constants.Keys.SkipDialogue)) {
-					DialogueManager.SkipToEnd();
 				}
 
 			}
@@ -53,6 +55,7 @@ namespace Platfotome {
 
 		private void OnDestroy() {
 			DialogueManager.DialogueScript = null;
+			DialogueManager.ChoiceScript = null;
 		}
 
 	}

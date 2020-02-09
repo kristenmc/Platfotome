@@ -15,13 +15,14 @@ namespace Platfotome.GUI {
 
 		public GameObject buttonPrefab = null;
 
+		public Color tmpHighlightColor;
+		public Color tmpSelectColor;
+		public float delayAfterSelect = 0.3f;
+
 		public int selectionIndex;
 		private int choiceCount;
 
-		private void Awake() {
-			ClearAll();
-			gameObject.SetActive(false);
-		}
+		private DialogueChoice choice;
 
 		internal void ClearAll() {
 			Array.ForEach(buttons, x => Util.DestroyChildGameObjects(x));
@@ -31,6 +32,8 @@ namespace Platfotome.GUI {
 
 		internal void LoadChoice(string key, DialogueChoice choice) {
 			ClearAll();
+
+			this.choice = choice;
 
 			choice.style.Resolve(out var np, out var fr, out var pt, out var bg);
 			LoadPrefab(portrait, pt, "portrait", key);
@@ -47,6 +50,7 @@ namespace Platfotome.GUI {
 				tmpColor[i] = refScript.image.color;
 			}
 
+			selectionIndex = 0;
 			ChangeSelectionIndex(0);
 
 			DialogueManager.ChoiceActive = true;
@@ -56,22 +60,52 @@ namespace Platfotome.GUI {
 
 		Color[] tmpColor;
 
-		internal void ChangeSelectionIndex(int delta) {
+		/// <summary>
+		/// Move the selected choice box down by 1.
+		/// </summary>
+		public void ChoiceUp() => ChangeSelectionIndex(-1);
+
+		/// <summary>
+		/// Move the selected choice box down by 1.
+		/// </summary>
+		public void ChoiceDown() => ChangeSelectionIndex(1);
+
+		private void ChangeSelectionIndex(int delta) {
 			selectionIndex += delta;
 			selectionIndex %= choiceCount;
 			if (selectionIndex < 0) selectionIndex += choiceCount;
 
 			for (int i = 0; i < choiceCount; i++) {
-				buttonRefs[i].image.color = i == selectionIndex ? Color.grey : tmpColor[i];
+				buttonRefs[i].image.color = i == selectionIndex ? tmpHighlightColor : tmpColor[i];
 			}
 		}
 
-		internal void SelectCurrent() {
-			buttonRefs[selectionIndex].image.color = Color.Lerp(Color.red, Color.yellow, 0.5f);
-			Debug.Log($"Selected choice {selectionIndex}");
+		/// <summary>
+		/// Select the current choice.
+		/// </summary>
+		public void SelectCurrent() {
+			buttonRefs[selectionIndex].image.color = tmpSelectColor;
+			Invoke("SelectCurrentDelayed", delayAfterSelect);
 		}
 
-		internal void Close() {
+		private void SelectCurrentDelayed() {
+			var selection = choice[selectionIndex];
+			if (selection.loadType != MetaLoadType.None) {
+				try {
+					DialogueManager.LoadKey(selection.loadType, choice[selectionIndex].trigger);
+				} catch (Exception) {
+					Debug.LogError(Prefix + " Failed to execute choice output trigger");
+				}
+				if (!(selection.loadType == MetaLoadType.Choice || selection.loadType == MetaLoadType.Level)) {
+					Close();
+				}
+			}
+		}
+
+		/// <summary>
+		/// Close the currently active choice dialogue.
+		/// </summary>
+		public void Close() {
 			StopAllCoroutines();
 			gameObject.SetActive(false);
 			DialogueManager.ChoiceActive = false;

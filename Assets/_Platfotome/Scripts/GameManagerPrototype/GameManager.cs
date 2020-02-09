@@ -13,17 +13,35 @@ namespace Platfotome {
 		/// <summary>
 		/// Returns true if current game state is specified type.
 		/// </summary>
-		public static bool InGameState(Type gameStateType) => CurrentState.GetType().IsEquivalentTo(gameStateType);
+		public static bool InGameState(Type gameStateType) => CurrentState == null ? false : CurrentState.GetType().IsEquivalentTo(gameStateType);
 		public static KeyWordArgs StateArgs { get; private set; }
 
 		private static Transform transitionCanvas;
+		private static GameObject pauseGUI;
 
 		private static readonly SimpleTimer transitionTimer = new SimpleTimer(1);
 		private static GameState toLoad = null;
 
+		private static bool paused_;
+		public static bool Paused {
+			get => paused_;
+			set {
+				if (CurrentState != null && CurrentState.AllowPause) {
+					paused_ = value;
+					Time.timeScale = paused_ ? 0f : 1f;
+					pauseGUI.SetActive(paused_);
+					Debug.Log(string.Format(LogName + " Game <b>{0}</b>", paused_ ? "Paused" : "Unpaused"));
+				} else {
+					Debug.Log("Pause blacklist");
+				}
+			}
+		}
+
 		internal static void Initialize() {
 			SystemsInitializer.Initialize();
 			transitionCanvas = GameObject.FindWithTag("TransitionCanvas").transform;
+			pauseGUI = GameObject.FindWithTag("PauseCanvas").transform.GetChild(0).gameObject;
+			pauseGUI.SetActive(false);
 			IsFullStartup = true;
 		}
 
@@ -33,6 +51,10 @@ namespace Platfotome {
 
 		internal static void Update() {
 			transitionTimer.Update();
+
+			if (Input.GetButtonDown(Constants.Keys.Pause)) {
+				Paused = !Paused;
+			}
 
 			if (transitionTimer.Done && toLoad != null) {
 				LoadInternal(toLoad);

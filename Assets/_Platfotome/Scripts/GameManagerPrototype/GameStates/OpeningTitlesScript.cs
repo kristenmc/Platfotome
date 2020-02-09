@@ -13,8 +13,10 @@ namespace Platfotome {
 		public float totalScrollTime = 1.2f;
 
 		private Animator animator;
+		private bool hasRequest;
 
 		private void Awake() {
+			hasRequest = false;
 			animator = GetComponent<Animator>();
 			animator.speed = 0;
 			animator.Play(clipname);
@@ -23,6 +25,12 @@ namespace Platfotome {
 
 		private void Loaded() {
 			animator.speed = 1;
+		}
+
+		private void Update() {
+			if (Input.GetButtonDown(Constants.Keys.SkipCutscene)) {
+				RequestNext();
+			}
 		}
 
 		public void BeginScroll() {
@@ -41,8 +49,15 @@ namespace Platfotome {
 
 			yield return new WaitForSecondsRealtime(3f);
 
-			GameManager.RequestStateTransition(new MainMenuState());
+			RequestNext();
 
+		}
+
+		private void RequestNext() {
+			if (!hasRequest) {
+				GameManager.RequestStateTransition(new MainMenuState());
+				hasRequest = true;
+			}
 		}
 
 	}

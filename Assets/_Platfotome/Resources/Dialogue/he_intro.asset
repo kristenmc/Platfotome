@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207059a5b5710d14b936ee64604bcb6a, type: 3}
-  m_Name: test0
+  m_Name: he_intro
   m_EditorClassIdentifier: 
   style: {fileID: 11400000, guid: 8088d3dc5ccf25a48a12d8f1a1eb772f, type: 2}
   text:
   - Woah, it's HE MAN.
-  - $test0_choice$
   - <i>Woooooaaaaaahhhhhh</i>
   - Long long long long long long long long long long long long long long long long
     long long long long long long long long long long long long long long piece of
     text.
-  - (end)
+  - $he_angru$

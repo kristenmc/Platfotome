@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878e069ba72b5724daf2a7e0ddc11dbf, type: 3}
-  m_Name: test0_choice
+  m_Script: {fileID: 11500000, guid: 207059a5b5710d14b936ee64604bcb6a, type: 3}
+  m_Name: he_angru
   m_EditorClassIdentifier: 
   style: {fileID: 11400000, guid: ad3dfc674d956cf42ad05383b4a76f1e, type: 2}
-  choices:
-  - text: Hell Ya
-    trigger: yes
-  - text: Nah Dogg
-    trigger: no
-  - text: Bruh IDk
-    trigger: maybe
+  text:
+  - He isn't just MAN, HE-ANGRY
+  - '%he_choice_all%'

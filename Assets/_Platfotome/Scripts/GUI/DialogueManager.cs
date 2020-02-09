@@ -75,8 +75,6 @@ namespace Platfotome.GUI {
 			}
 		}
 
-		#region Dialogue
-
 		/// <summary>
 		/// Loads a dialogue sequence from the given key.
 		/// </summary>
@@ -88,47 +86,6 @@ namespace Platfotome.GUI {
 				Debug.LogError(Prefix + $" Failed to find requested dialogue key '{key}'");
 			}
 		}
-
-		/// <summary>
-		/// Begins the process of revealing text.
-		/// </summary>
-		public static void BeginReveal() {
-			if (WarnInit("Request to begin revealing text failed.")) return;
-			if (DialogueScript != null && DialogueActive) {
-				DialogueScript.BeginReveal();
-			}
-		}
-
-		public static void SkipToEnd() {
-			if (WarnInit("Request to skip to end of text failed.")) return;
-			if (DialogueScript != null && DialogueActive) {
-				DialogueScript.SkipToEnd();
-			}
-		}
-
-		/// <summary>
-		/// Advance to the next page of text.
-		/// </summary>
-		public static void AdvanceDialogue() {
-			if (WarnInit("Request to advance text failed.")) return;
-			if (DialogueScript != null && DialogueActive) {
-				DialogueScript.AdvanceText();
-			}
-		}
-
-		/// <summary>
-		/// Close the currently active dialogue sequence.
-		/// </summary>
-		public static void CloseCurrent() {
-			if (WarnInit("Request to close dialogue box failed.")) return;
-			if (DialogueScript != null && DialogueActive) {
-				DialogueScript.Close();
-			}
-		}
-
-		#endregion
-
-		#region Choice Public Interface
 
 		/// <summary>
 		/// Load a dialogue choice from the given key.
@@ -143,33 +100,57 @@ namespace Platfotome.GUI {
 		}
 
 		/// <summary>
-		/// Move the selected choice box down by 1.
+		/// Check if the given text is an in-text load token.
 		/// </summary>
-		public static void ChoiceUp() => ChoiceDelta(-1);
+		public static MetaLoadType GetMetaLoadType(string text) {
+			if (text.Length > 2 && text[0] == text[text.Length - 1]) {
+				if (text[0] == '$') return MetaLoadType.Dialogue;
+				if (text[0] == '%') return MetaLoadType.Choice;
+				if (text[0] == '@') return MetaLoadType.Level;
+			}
+			return MetaLoadType.None;
+		}
 
 		/// <summary>
-		/// Move the selected choice box down by 1.
+		/// Attempt to load the key specified in the in-text load token.
 		/// </summary>
-		public static void ChoiceDown() => ChoiceDelta(1);
-
-		private static void ChoiceDelta(int delta) {
-			if (WarnInit("Request to change choice selection failed.")) return;
-			if (ChoiceScript != null && ChoiceActive) {
-				ChoiceScript.ChangeSelectionIndex(delta);
+		public static void LoadInTextToken(string text) {
+			string key = text.Substring(1, text.Length - 2);
+			if (text[0] == '$') {
+				LoadDialogue(key);
+				DialogueScript.BeginReveal();
+			} else if (text[0] == '%') {
+				LoadChoice(key);
+			} else if (text[0] == '@') {
+				LoadLevel(key);
 			}
 		}
 
 		/// <summary>
-		/// Select the current choice.
+		/// Load the given key.
 		/// </summary>
-		public static void SelectCurrentChoice() {
-			if (WarnInit("Request to select current choice failed.")) return;
-			if (ChoiceScript != null && ChoiceActive) {
-				ChoiceScript.SelectCurrent();
+		public static void LoadKey(MetaLoadType type, string key) {
+			switch (type) {
+				case MetaLoadType.None:
+					Debug.Log(Prefix + $" Loadtype None: '{key}'");
+					break;
+				case MetaLoadType.Dialogue:
+					LoadDialogue(key);
+					DialogueScript.BeginReveal();
+					break;
+				case MetaLoadType.Choice:
+					LoadChoice(key);
+					break;
+				case MetaLoadType.Level:
+					LoadLevel(key);
+					break;
 			}
 		}
 
-		#endregion
+		private static void LoadLevel(string fullKey) {
+			string[] parts = fullKey.Split('|');
+			GameManager.RequestStateTransition(new ChoiceWorldState(parts[0], parts.Length > 1 ? parts[1] : "(none)"));
+		}
 
 		private static bool WarnInit(string warning) {
 			if (!Initialized) {

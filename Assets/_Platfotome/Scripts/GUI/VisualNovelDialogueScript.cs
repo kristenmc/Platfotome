@@ -26,11 +26,6 @@ namespace Platfotome.GUI {
 
 		private string CurrentText => textSequence[curSequenceIndex];
 
-		private void Awake() {
-			ClearAll();
-			gameObject.SetActive(false);
-		}
-
 		internal void ClearAll() {
 			Util.DestroyChildGameObjects(nameplate);
 			Util.DestroyChildGameObjects(frame);
@@ -40,8 +35,10 @@ namespace Platfotome.GUI {
 		}
 
 		internal void LoadSequence(string key, DialogueSequence sequence) {
+
 			ClearAll();
 
+			revealingText = false;
 			sequence.style.Resolve(out var np, out var fr, out var pt, out var bg);
 
 			LoadPrefab(nameplate, np, "nameplate", key);
@@ -52,7 +49,7 @@ namespace Platfotome.GUI {
 			if (sequence.text != null && sequence.text.Length > 0) {
 				textSequence = sequence.text;
 				curSequenceIndex = 0;
-				if (CheckLoadTrigger()) return;
+				if (CheckMetaLoad()) return;
 				textmesh.text = CurrentText;
 			} else {
 				Debug.LogWarning(Prefix + $" Found no text to display for key '{key}'");
@@ -60,49 +57,60 @@ namespace Platfotome.GUI {
 			}
 
 			textmesh.maxVisibleCharacters = 0;
-			revealingText = false;
 			gameObject.SetActive(true);
 			DialogueManager.DialogueActive = true;
 
 		}
 
-		internal void AdvanceText() {
-			if (revealingText) {
-				SkipToEnd();
-			} else if (curSequenceIndex < textSequence.Length - 1) {
-				++curSequenceIndex;
-				if (CheckLoadTrigger()) return;
-				textmesh.text = CurrentText;
-				BeginReveal();
-			}
-		}
-
-		internal void BeginReveal() {
-			if (!string.IsNullOrEmpty(textmesh.text)) {
+		/// <summary>
+		/// Begins the process of revealing text.
+		/// </summary>
+		public void BeginReveal() {
+			if (gameObject.activeSelf && !string.IsNullOrEmpty(textmesh.text)) {
 				StopAllCoroutines();
 				StartCoroutine(RevealCR());
 			}
 		}
 
-		internal void Close() {
+		/// <summary>
+		/// Advance to the next page of text.
+		/// </summary>
+		public void AdvanceText() {
+			if (revealingText) {
+				SkipToEnd();
+			} else if (curSequenceIndex < textSequence.Length - 1) {
+				++curSequenceIndex;
+				if (CheckMetaLoad()) return;
+				textmesh.text = CurrentText;
+				BeginReveal();
+			}
+		}
+
+		/// <summary>
+		/// Close the currently active dialogue sequence.
+		/// </summary>
+		public void Close() {
 			StopAllCoroutines();
 			DialogueManager.DialogueActive = false;
 			gameObject.SetActive(false);
 		}
 
-		internal void SkipToEnd() {
+		/// <summary>
+		/// Immediately finish the process of revealing text.
+		/// </summary>
+		public void SkipToEnd() {
 			StopReveal();
 		}
 
 		private IEnumerator RevealCR() {
 			textmesh.maxVisibleCharacters = 0;
 
-			yield return new WaitForSecondsRealtime(0.05f);
+			yield return new WaitForSeconds(0.05f);
 			revealingText = true;
 
 			for (int i = 0; i < textmesh.text.Length + 1; i++) {
 				textmesh.maxVisibleCharacters = i;
-				yield return new WaitForSecondsRealtime(1 / charactersPerSecond);
+				yield return new WaitForSeconds(1 / charactersPerSecond);
 			}
 
 			revealingText = false;
@@ -122,12 +130,14 @@ namespace Platfotome.GUI {
 			}
 		}
 
-		private bool CheckLoadTrigger() {
-			string text = CurrentText;
-			if (text.Length > 2 && text[0] == '$' && text[text.Length - 1] == '$') {
-				DialogueManager.LoadChoice(text.Substring(1, text.Length - 2));
-				Close();
+		private bool CheckMetaLoad() {
+			MetaLoadType type = DialogueManager.GetMetaLoadType(CurrentText);
+			if (type == MetaLoadType.Dialogue || type == MetaLoadType.Level) {
+				DialogueManager.LoadInTextToken(CurrentText);
 				return true;
+			} else if (type == MetaLoadType.Choice) {
+				Close();
+				DialogueManager.LoadInTextToken(CurrentText);
 			}
 			return false;
 		}

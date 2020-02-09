@@ -11,10 +11,14 @@ namespace Platfotome {
 
 		public static class Keys {
 
+			public const string Pause = "Cancel";
+
 			public const string AdvanceDialogue = "Jump";
 			public const string SkipDialogue = "Fire1";
 
 			public const string ChooseDialogueChoice = "Jump";
+
+			public const string SkipCutscene = "Jump";
 
 		}
 

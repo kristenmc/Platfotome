@@ -10,6 +10,7 @@ namespace Platfotome.GUI {
 		[Serializable]
 		public class Choice {
 			public string text = null;
+			public MetaLoadType loadType = MetaLoadType.Level;
 			public string trigger = null;
 		}
 

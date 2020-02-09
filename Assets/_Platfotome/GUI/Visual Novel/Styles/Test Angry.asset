@@ -17,3 +17,5 @@ MonoBehaviour:
   frame: {fileID: 0}
   portrait: {fileID: 7578059854613023401, guid: f08f9b3eb6d0588409c384f12624e18a,
     type: 3}
+  background: {fileID: 5758870211699945036, guid: 9a8fac866c023fb498be8eb9a7012ce4,
+    type: 3}

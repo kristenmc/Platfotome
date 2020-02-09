@@ -7,6 +7,7 @@ TagManager:
   - TransitionCanvas
   - SceneCamera
   - ChoiceWorldViewport
+  - PauseCanvas
   layers:
   - Default
   - TransparentFX
