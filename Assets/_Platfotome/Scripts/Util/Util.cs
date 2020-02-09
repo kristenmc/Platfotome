@@ -27,6 +27,11 @@ namespace Platfotome {
 			}
 		}
 
+		/// <summary>
+		/// Get a Vector2 containing only the X and Y components of a Vector3.
+		/// </summary>
+		public static Vector2 GetXY(this Vector3 vector3) => new Vector2(vector3.x, vector3.y);
+
 	}
 
 }

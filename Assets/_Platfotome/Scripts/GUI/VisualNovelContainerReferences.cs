@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Platfotome.GUI {
 
-	internal class VisualNovelContainerReferences : MonoBehaviour {
+	public class VisualNovelContainerReferences : MonoBehaviour {
 
 		public float charactersPerSecond = 20;
 

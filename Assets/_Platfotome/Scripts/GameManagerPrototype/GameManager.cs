@@ -8,6 +8,7 @@ namespace Platfotome {
 
 		internal const string LogName = "[GameManager]";
 
+		public static bool IsFullStartup { get; private set; }
 		public static GameState CurrentState { get; private set; }
 
 		private static GameObject transitionCanvas;
@@ -18,6 +19,7 @@ namespace Platfotome {
 		internal static void Initialize() {
 			SystemsInitializer.Initialize();
 			transitionCanvas = GameObject.FindWithTag("TransitionCanvas");
+			IsFullStartup = true;
 		}
 
 		internal static void LoadOpeningTitles() {
@@ -53,7 +55,7 @@ namespace Platfotome {
 		}
 
 		private static void LoadInternal(GameState state) {
-			Debug.Log($"<b>{LogName} Loading {state}</b>");
+			Debug.Log($"{LogName} Loading <b>{state.SceneName}</b>\n{state}");
 			SceneManager.LoadSceneAsync(state.SceneName, state.LoadMode);
 		}
 

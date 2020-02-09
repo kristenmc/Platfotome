@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Platfotome.Editor {
+namespace Platfotome.CustomEditors {
 
 	[CustomPropertyDrawer(typeof(SimpleTimer))]
 	public class SimpleTimerPropertyDrawer : PropertyDrawer {

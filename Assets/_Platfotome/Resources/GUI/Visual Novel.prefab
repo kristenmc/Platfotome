@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 3246915169295667034}
   m_Layer: 5
   m_Name: Visual Novel
-  m_TagString: GUI VN References
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

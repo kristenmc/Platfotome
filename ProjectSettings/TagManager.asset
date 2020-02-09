@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GUI VN References
-  - MainCanvas
   - TransitionCanvas
+  - SceneCamera
+  - ChoiceWorldViewport
   layers:
   - Default
   - TransparentFX
@@ -33,7 +33,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - UI Scroll Layer
   - 
   - 
   - 

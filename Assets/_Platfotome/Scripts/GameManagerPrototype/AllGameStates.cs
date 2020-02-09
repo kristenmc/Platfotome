@@ -14,4 +14,22 @@ namespace Platfotome {
 		}
 	}
 
+	public class OverworldState : GameState {
+		public OverworldState() :
+			base("Overworld", TransitionLibrary.GetTransition(typeof(FadeToBlack)), new TransitionArguments(0.2f, 0.1f, 0.2f)) {
+		}
+	}
+
+	public class VisualNovelState : GameState {
+		public VisualNovelState() :
+			base("VisualNovel", TransitionLibrary.GetTransition(typeof(FadeToBlack)), new TransitionArguments(0.2f, 0.1f, 0.2f)) {
+		}
+	}
+
+	public class ChoiceWorldState : GameState {
+		public ChoiceWorldState() :
+			base("ChoiceWorld", TransitionLibrary.GetTransition(typeof(FadeToBlack)), new TransitionArguments(0.2f, 0.1f, 0.2f)) {
+		}
+	}
+
 }

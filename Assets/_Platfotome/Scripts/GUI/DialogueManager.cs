@@ -8,7 +8,7 @@ namespace Platfotome.GUI {
 	public static class DialogueManager {
 
 		private static readonly Dictionary<string, DialogueSequence> dialogue = new Dictionary<string, DialogueSequence>();
-		private static VisualNovelContainerReferences references;
+		internal static VisualNovelContainerReferences RefScript { get; set; }
 
 		internal const string Prefix = "[DialogueManager]";
 
@@ -28,16 +28,7 @@ namespace Platfotome.GUI {
 					Debug.LogWarning(Prefix + $" Found duplicate key '{item.name}'. Ignoring duplicate.");
 				}
 			}
-
-			try {
-				var canvas = GameObject.FindWithTag("MainCanvas");
-				var prefab = Resources.Load<GameObject>("GUI/Visual Novel");
-				references = UnityEngine.Object.Instantiate(prefab, canvas.transform).GetComponent<VisualNovelContainerReferences>();
-				Initialized = true;
-			} catch (NullReferenceException) {
-				Debug.LogError(Prefix + " Failed to find Visual Novel References script. <b>Dialogue cannot be loaded.</b>");
-				return;
-			}
+			Initialized = true;
 
 			if (showOutput) {
 				Debug.Log($"<b>{Prefix} Start printout.</b>");
@@ -76,7 +67,7 @@ namespace Platfotome.GUI {
 			}
 
 			if (dialogue.TryGetValue(key, out DialogueSequence sequence)) {
-				references.LoadSequence(key, sequence);
+				RefScript.LoadSequence(key, sequence);
 			} else {
 				Debug.LogError(Prefix + $" Failed to find requested key '{key}'");
 			}
@@ -91,7 +82,9 @@ namespace Platfotome.GUI {
 				Debug.LogError(Prefix + " Request to advance text failed. DialogueManager was not fully initialized.");
 				return;
 			}
-			references.AdvanceText();
+			if (RefScript != null) {
+				RefScript.AdvanceText();
+			}
 		}
 
 		/// <summary>
@@ -102,7 +95,9 @@ namespace Platfotome.GUI {
 				Debug.LogError(Prefix + " Request to close dialogue box failed. DialogueManager was not fully initialized.");
 				return;
 			}
-			references.Close();
+			if (RefScript != null) {
+				RefScript.Close();
+			}
 		}
 
 	}

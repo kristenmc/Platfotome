@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Platfotome/Game States/OpeningTitles.unity
     guid: 4726449d6335c5040b2e0b7c5b2a750e
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/VisualNovel.unity
+    guid: 3c62d12e1ee8bdb4c9ddc88a8d81744a
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/ChoiceWorld.unity
+    guid: 35c6bf1d079f01346ba01a060ff080b5
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/Overworld.unity
+    guid: 5e0e13d7ea985ee469debd659c5afda4
   m_configObjects: {}

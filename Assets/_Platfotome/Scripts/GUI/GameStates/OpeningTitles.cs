@@ -7,6 +7,8 @@ namespace Platfotome {
 	public sealed class OpeningTitles : MonoBehaviour {
 
 		public string clipname;
+		public GameObject sparkle;
+		public Transform sparkleContainer;
 		public TextMeshProUGUI textmesh;
 		public float totalScrollTime = 1.2f;
 
@@ -33,6 +35,9 @@ namespace Platfotome {
 				textmesh.maxVisibleCharacters = i;
 				yield return new WaitForSecondsRealtime(totalScrollTime / textmesh.text.Length);
 			}
+
+			yield return new WaitForSecondsRealtime(0.3f);
+			Instantiate(sparkle, sparkleContainer);
 
 			yield return new WaitForSecondsRealtime(3f);
 

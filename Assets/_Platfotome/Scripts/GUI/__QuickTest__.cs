@@ -12,24 +12,22 @@ namespace Platfotome.GUI {
 
 		private void Update() {
 
-			if (Input.GetKeyDown(KeyCode.Alpha1)) {
-				GameManager.RequestStateTransition(new MainMenuState());
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha2)) {
+			if (Input.GetKeyDown(KeyCode.T)) {
+				CameraController.Instance.RequestAnimation("TestCameraPan");
 			}
 
-			//if (Input.GetKeyDown(KeyCode.Alpha1)) {
-			//	DialogueManager.Load("test0");
-			//}
-			//if (Input.GetKeyDown(KeyCode.Alpha2)) {
-			//	DialogueManager.Load("test1");
-			//}
-			//if (Input.GetKeyDown(KeyCode.RightArrow)) {
-			//	DialogueManager.AdvanceDialogue();
-			//}
-			//if (Input.GetKeyDown(KeyCode.DownArrow)) {
-			//	DialogueManager.CloseCurrent();
-			//}
+			if (Input.GetKeyDown(KeyCode.I)) {
+				DialogueManager.Load("test0");
+			}
+			if (Input.GetKeyDown(KeyCode.O)) {
+				DialogueManager.Load("test1");
+			}
+			if (Input.GetKeyDown(KeyCode.RightArrow)) {
+				DialogueManager.AdvanceDialogue();
+			}
+			if (Input.GetKeyDown(KeyCode.DownArrow)) {
+				DialogueManager.CloseCurrent();
+			}
 		}
 
 	}

@@ -15,6 +15,19 @@ namespace Platfotome {
 		}
 
 		private void Update() {
+			if (Input.GetKeyDown(KeyCode.Alpha1)) {
+				GameManager.RequestStateTransition(new OverworldState());
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				GameManager.RequestStateTransition(new VisualNovelState());
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha3)) {
+				GameManager.RequestStateTransition(new ChoiceWorldState());
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha4)) {
+				GameManager.RequestStateTransition(new MainMenuState());
+			}
+
 			GameManager.Update();
 		}
 
