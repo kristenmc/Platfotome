@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Platfotome.GUI {
 
-	[CreateAssetMenu(fileName = "New Dialogue Sequence", menuName = "GUI Assets/Dialogue Sequence", order = 110)]
+	[CreateAssetMenu(fileName = "New Dialogue Sequence", menuName = "GUI Assets/Dialogue Sequence", order = 111)]
 	internal class DialogueSequence : ScriptableObject {
 
 		public CharacterStyleGroup style = null;

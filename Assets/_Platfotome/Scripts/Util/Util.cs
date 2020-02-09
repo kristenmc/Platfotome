@@ -14,6 +14,7 @@ namespace Platfotome {
 		/// <para><i>Anakin no</i></para>
 		/// </summary>
 		public static void DestroyChildGameObjects(Transform parent, bool immediate = false) {
+			if (parent == null) throw new ArgumentNullException("Failed to destroy child game objects, parent transform was null.");
 			GameObject[] children = new GameObject[parent.childCount];
 			for (int i = 0; i < parent.childCount; i++) {
 				children[i] = parent.GetChild(i).gameObject;

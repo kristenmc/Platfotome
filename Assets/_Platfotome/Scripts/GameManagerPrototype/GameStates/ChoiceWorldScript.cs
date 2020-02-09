@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Platfotome {
 
-	public class ChoiceWorld : MonoBehaviour {
+	public class ChoiceWorldScript : MonoBehaviour {
 
 		private void Awake() {
 			CameraController.Instance.SetViewportMode(ViewportMode.Choiceworld);

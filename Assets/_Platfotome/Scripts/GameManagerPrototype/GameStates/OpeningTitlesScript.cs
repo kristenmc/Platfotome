@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Platfotome {
 
-	public sealed class OpeningTitles : MonoBehaviour {
+	public sealed class OpeningTitlesScript : MonoBehaviour {
 
 		public string clipname;
 		public GameObject sparkle;

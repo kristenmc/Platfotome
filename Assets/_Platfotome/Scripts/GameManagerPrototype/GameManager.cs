@@ -10,15 +10,20 @@ namespace Platfotome {
 
 		public static bool IsFullStartup { get; private set; }
 		public static GameState CurrentState { get; private set; }
+		/// <summary>
+		/// Returns true if current game state is specified type.
+		/// </summary>
+		public static bool InGameState(Type gameStateType) => CurrentState.GetType().IsEquivalentTo(gameStateType);
+		public static KeyWordArgs StateArgs { get; private set; }
 
-		private static GameObject transitionCanvas;
+		private static Transform transitionCanvas;
 
 		private static readonly SimpleTimer transitionTimer = new SimpleTimer(1);
 		private static GameState toLoad = null;
 
 		internal static void Initialize() {
 			SystemsInitializer.Initialize();
-			transitionCanvas = GameObject.FindWithTag("TransitionCanvas");
+			transitionCanvas = GameObject.FindWithTag("TransitionCanvas").transform;
 			IsFullStartup = true;
 		}
 
@@ -38,14 +43,16 @@ namespace Platfotome {
 		private static void Load(GameState state) {
 
 			CurrentState = state;
+			StateArgs = state.Args; 
 
 			if (state.Transition != null) {
 
-				Transition transition = UnityEngine.Object.Instantiate(state.Transition, transitionCanvas.transform);
+				Util.DestroyChildGameObjects(transitionCanvas);
+				Transition transition = UnityEngine.Object.Instantiate(state.Transition, transitionCanvas);
 				transition.Config(state.TransitionArguments);
 
 				toLoad = state;
-				transitionTimer.Duration = state.TransitionArguments.InTime;
+				transitionTimer.Duration = state.TransitionArguments.InTime + 0.02f; // add safety buffer
 				transitionTimer.Start();
 
 			} else {
@@ -57,6 +64,7 @@ namespace Platfotome {
 		private static void LoadInternal(GameState state) {
 			Debug.Log($"{LogName} Loading <b>{state.SceneName}</b>\n{state}");
 			SceneManager.LoadSceneAsync(state.SceneName, state.LoadMode);
+			CameraController.Instance.ResetProperties();
 		}
 
 		internal static void TransitionComplete() {

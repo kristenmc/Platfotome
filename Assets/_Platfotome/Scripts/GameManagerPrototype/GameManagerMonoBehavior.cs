@@ -19,7 +19,7 @@ namespace Platfotome {
 				GameManager.RequestStateTransition(new OverworldState());
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha2)) {
-				GameManager.RequestStateTransition(new VisualNovelState());
+				GameManager.RequestStateTransition(new VisualNovelState("test0"));
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha3)) {
 				GameManager.RequestStateTransition(new ChoiceWorldState());

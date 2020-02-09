@@ -21,8 +21,9 @@ namespace Platfotome {
 	}
 
 	public class VisualNovelState : GameState {
-		public VisualNovelState() :
+		public VisualNovelState(string dialogueKey) :
 			base("VisualNovel", TransitionLibrary.GetTransition(typeof(FadeToBlack)), new TransitionArguments(0.2f, 0.1f, 0.2f)) {
+			Args.Add("key", dialogueKey);
 		}
 	}
 

@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b56fe5438adb4488cd131146da0c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  c: {fileID: 7400000, guid: d255b2f6194a7c8458a92de9251f8c82, type: 2}
 --- !u!114 &1418057041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +339,7 @@ GameObject:
   - component: {fileID: 1890999035}
   - component: {fileID: 1890999034}
   - component: {fileID: 1890999038}
+  - component: {fileID: 1890999039}
   m_Layer: 0
   m_Name: Scene Camera
   m_TagString: MainCamera
@@ -437,3 +439,26 @@ MonoBehaviour:
   mode: 0
   trackTarget: {fileID: 0}
   smoothDampTime: 0.05
+  track: {fileID: 0}
+  animationTimer:
+    duration: 0
+    current: 0
+--- !u!95 &1890999039
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890999033}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aac0da19f7a590847a942e51c81f5be1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -15,4 +15,9 @@ MonoBehaviour:
   style: {fileID: 11400000, guid: 8088d3dc5ccf25a48a12d8f1a1eb772f, type: 2}
   text:
   - Woah, it's HE MAN.
+  - $test0_choice$
   - <i>Woooooaaaaaahhhhhh</i>
+  - Long long long long long long long long long long long long long long long long
+    long long long long long long long long long long long long long long piece of
+    text.
+  - (end)

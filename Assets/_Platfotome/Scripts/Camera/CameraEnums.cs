@@ -1,7 +1,7 @@
 ﻿namespace Platfotome {
 
 	public enum CameraMode {
-		Track, Animation, Map
+		Idle, Track, Animation, Map
 	}
 
 	public enum ViewportMode {

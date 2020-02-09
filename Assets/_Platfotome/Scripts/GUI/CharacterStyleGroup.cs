@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Platfotome.GUI {
 
-	[CreateAssetMenu(fileName = "New Style", menuName = "GUI Assets/Style", order = 111)]
+	[CreateAssetMenu(fileName = "New Style", menuName = "GUI Assets/Style", order = 110)]
 	internal class CharacterStyleGroup : ScriptableObject {
 
 		public CharacterStyleGroup baseStyle = null;

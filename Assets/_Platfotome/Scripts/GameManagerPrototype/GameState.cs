@@ -13,6 +13,8 @@ namespace Platfotome {
 		public Transition Transition { get; }
 		public TransitionArguments TransitionArguments { get; }
 
+		internal KeyWordArgs Args { get; }
+
 		protected GameState(string sceneName, Transition transition = null, TransitionArguments transitionArguments = default, LoadSceneMode mode = LoadSceneMode.Single, bool loadAsync = false) {
 			SceneName = sceneName;
 			LoadMode = mode;
@@ -20,11 +22,13 @@ namespace Platfotome {
 
 			Transition = transition;
 			TransitionArguments = transitionArguments;
+
+			Args = new KeyWordArgs();
 		}
 
 		public override string ToString() {
-			return string.Format("GameState('{0}', {1}, {2}, {3})",
-				SceneName, Transition == null ? "None" : Transition.ToString(), LoadMode, LoadAsync ? "Async" : "Immediate");
+			return string.Format("GameState('{0}', {1}, {2}, {3}, {4})",
+				SceneName, Transition == null ? "None" : Transition.ToString(), Args, LoadMode, LoadAsync ? "Async" : "Immediate");
 		}
 
 	}
