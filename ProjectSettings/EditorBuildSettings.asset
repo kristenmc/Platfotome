@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Platfotome/Game States/Overworld.unity
     guid: 5e0e13d7ea985ee469debd659c5afda4
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/Credits.unity
+    guid: 81d736d6bfed36a489a77f21850e7984
   m_configObjects: {}

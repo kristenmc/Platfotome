@@ -27,6 +27,9 @@ namespace Platfotome {
 			if (Input.GetKeyDown(KeyCode.Alpha4)) {
 				GameManager.RequestStateTransition(new MainMenuState());
 			}
+			if (Input.GetKeyDown(KeyCode.Alpha6)) {
+				GameManager.RequestStateTransition(new CreditsState());
+			}
 
 			GameManager.Update();
 		}
