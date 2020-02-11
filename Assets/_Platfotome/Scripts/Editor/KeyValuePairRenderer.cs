@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Platfotome.Editor {
+namespace Platfotome.CustomEditors {
 
     public class KeyValuePairRenderer : PropertyDrawer {
 

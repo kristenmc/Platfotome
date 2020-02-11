@@ -63,7 +63,7 @@ namespace Platfotome {
 		/// <summary>
 		/// Prints a dictionary as a header followed by each item in the format "key : value", applying conversion functions to each.
 		/// </summary>
-		public static string ToHeaderedList<TKey, TValue>(this Dictionary<TKey, TValue> dict, string name, Func<TKey, object> keyConverter = null, Func<TValue, object> valueConverter = null) {
+		public static string ToHeaderedDict<TKey, TValue>(this Dictionary<TKey, TValue> dict, string name, Func<TKey, object> keyConverter = null, Func<TValue, object> valueConverter = null) {
 			return ToHeaderedList(name, dict, x => $"{(keyConverter == null ? x.Key : keyConverter(x.Key))} : {(valueConverter == null ? x.Value : valueConverter(x.Value))}");
 		}
 

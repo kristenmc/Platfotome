@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Platfotome {
+
+	public class GameManagerMonoBehavior : MonoBehaviour {
+
+		private void Awake() {
+			GameManager.Initialize();
+		}
+
+		private void Start() {
+			GameManager.LoadOpeningTitles();
+		}
+
+		private void Update() {
+			if (Input.GetKeyDown(KeyCode.Alpha1)) {
+				GameManager.RequestStateTransition(new OverworldState());
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				GameManager.RequestStateTransition(new VisualNovelState("he_intro"));
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha3)) {
+				GameManager.RequestStateTransition(new ChoiceWorldState("test0", "Default Header"));
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha4)) {
+				GameManager.RequestStateTransition(new MainMenuState());
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha6)) {
+				GameManager.RequestStateTransition(new CreditsState());
+			}
+
+			GameManager.Update();
+		}
+
+	}
+
+}

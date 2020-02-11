@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TransitionCanvas
+  - SceneCamera
+  - ChoiceWorldViewport
+  - PauseCanvas
   layers:
   - Default
   - TransparentFX
@@ -13,6 +17,7 @@ TagManager:
   - UI
   - 
   - 
+  - Ground
   - 
   - 
   - 
@@ -29,8 +34,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - UI Scroll Layer
   - 
   - 
   - 

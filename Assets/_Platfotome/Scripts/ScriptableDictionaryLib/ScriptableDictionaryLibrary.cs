@@ -22,14 +22,14 @@ namespace Platfotome {
 		/// <summary>
 		/// Call this function exactly once during init to load dictionaries.
 		/// </summary>
-		public static void LoadAllDictionaries(bool showOuput = false) {
+		public static void Initialize(bool showOutput = false) {
 			if (loaded) {
 				Debug.LogWarning("[ScriptableDictionary] Attempted to load library twice.");
 				return;
 			}
 			OnLoad?.Invoke();
 
-			if (showOuput) {
+			if (showOutput) {
 
 				Debug.Log("<b>[ScriptableDictionary] Start printout.</b>");
 

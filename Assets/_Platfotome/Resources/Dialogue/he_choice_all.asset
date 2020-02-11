@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878e069ba72b5724daf2a7e0ddc11dbf, type: 3}
+  m_Name: he_choice_all
+  m_EditorClassIdentifier: 
+  style: {fileID: 11400000, guid: ad3dfc674d956cf42ad05383b4a76f1e, type: 2}
+  choices:
+  - text: Hell Ya
+    loadType: 1
+    trigger: he_yes
+  - text: Nah Dogg
+    loadType: 3
+    trigger: he_very_angru|What did you just say to me?
+  - text: Bruh IDk
+    loadType: 1
+    trigger: he_choose

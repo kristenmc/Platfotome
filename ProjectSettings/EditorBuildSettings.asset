@@ -6,6 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/_Platfotome/Game States/Startup.unity
+    guid: 6c93361c1752ca64c97e3c4e857e8674
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/MainMenu.unity
+    guid: 2b28bc64f03101445be03a920811740d
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/OpeningTitles.unity
+    guid: 4726449d6335c5040b2e0b7c5b2a750e
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/VisualNovel.unity
+    guid: 3c62d12e1ee8bdb4c9ddc88a8d81744a
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/ChoiceWorld.unity
+    guid: 35c6bf1d079f01346ba01a060ff080b5
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/Overworld.unity
+    guid: 5e0e13d7ea985ee469debd659c5afda4
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/Credits.unity
+    guid: 81d736d6bfed36a489a77f21850e7984
   m_configObjects: {}

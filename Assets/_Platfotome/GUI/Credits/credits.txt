@@ -1,0 +1,43 @@
+#Producer
+@Henry Dang
+>[TODO]
+
+
+#Audio Designer
+@Kristen Cambell
+>[TODO]
+
+
+#Writers
+@Elizabeth
+>[TODO]
+@Cole Melody*
+>Turtle, Bullet, Spike
+^*Member during Spring Game Jam 2019
+
+
+#Programmers
+@Ervie Tubig
+>[TODO]
+@Conan Truong
+>Player Controller
+@bryan
+>ui and stuff
+
+#Designers
+@Evan C.
+>[TODO]
+@Avineesh Kompella
+>Game Design, Level Design
+
+
+#Artists
+@Henry Dang 
+>Turtle Pixel Art, Player Pixel Art, Bullet Pixel Art
+@Santiago Morales*
+>Turret Art, Spike Art
+^*Member during Spring Game Jam 2019
+
+
+
+#Thanks for Playing!
