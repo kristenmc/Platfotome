@@ -11,6 +11,7 @@ namespace Platfotome {
 		[SerializeField] float acceleration = 10;
 		[SerializeField] float decelerationFactor = 0.85f;
 		[SerializeField] LayerMask groundCheckLayers = 1 << 8;
+        [SerializeField] float minYPosition = -50;
 
 		Rigidbody2D rb = null;
 		Collider2D col = null;
@@ -72,11 +73,36 @@ namespace Platfotome {
 			}
 
 			rb.velocity = velocity;
+
+            if (rb.position.y < minYPosition) {
+                Die();
+            }
 		}
 
 		public bool isGrounded() {
 			RaycastHit2D hit = Physics2D.BoxCast(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x, 0.01f), 0, Vector2.down, 0.01f, groundCheckLayers.value);
 			return hit.transform != null;
 		}
-	}
+
+        void OnTriggerEnter2D(Collider2D collision) {
+            if (collision.gameObject.layer == 9) {
+                Die();
+            }
+        }
+
+        void Die() {
+            enabled = false;
+            Destroy(gameObject, 1f);
+            if (GameManager.InGameState(typeof(ChoiceWorldState))) {
+                if (GameManager.StateArgs.TryGetValue(ChoiceWorldState.LevelKey, out string val)) {
+                    GameManager.RequestStateTransition(new ChoiceWorldState(val, ""));
+                }
+            }
+        }
+
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(new Vector3(-100, minYPosition), new Vector3(200, 0));
+        }
+    }
 }
