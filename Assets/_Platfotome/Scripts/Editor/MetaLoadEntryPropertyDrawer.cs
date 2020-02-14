@@ -6,51 +6,51 @@ using UnityEngine;
 
 namespace Platfotome.CustomEditors {
 
-	//[CustomEditor(typeof(MetaLoadEntry))]
-	//public class MetaLoadEntryPropertyDrawer : PropertyDrawer {
+	[CustomPropertyDrawer(typeof(MetaLoadEntry))]
+	public class MetaLoadEntryPropertyDrawer : PropertyDrawer {
 
-	//	private bool open;
+		private bool open;
 
-	//	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 
-	//		EditorGUI.BeginProperty(position, label, property);
+			EditorGUI.BeginProperty(position, label, property);
 
-	//		float width = EditorGUIUtility.labelWidth;
-	//		EditorGUIUtility.labelWidth = 80f;
+			float width = EditorGUIUtility.labelWidth;
+			EditorGUIUtility.labelWidth = 80f;
 
-	//		open = EditorGUILayout.BeginFoldoutHeaderGroup(open, new GUIContent("Meta Load Entry"), EditorStyles.foldout);
+			open = EditorGUILayout.BeginFoldoutHeaderGroup(open, new GUIContent("Meta Load Entry"), EditorStyles.foldout);
 
-	//		if (open) {
+			if (open) {
 
-	//			var typeProp = property.FindPropertyRelative("type");
+				var typeProp = property.FindPropertyRelative("type");
 
-	//			EditorGUILayout.PropertyField(typeProp, new GUIContent("Load Type"));
+				EditorGUILayout.PropertyField(typeProp, new GUIContent("Load Type"));
 
-	//			switch (typeProp.enumValueIndex) {
-	//				case (int)MetaLoadType.None:
-	//					break;
-	//				case (int)MetaLoadType.Level:
-	//					EditorGUILayout.ObjectField(property.FindPropertyRelative("level"));
-	//					break;
-	//				case (int)MetaLoadType.Dialogue:
-	//					EditorGUILayout.ObjectField(property.FindPropertyRelative("dialogue"));
-	//					break;
-	//				case (int)MetaLoadType.Choice:
-	//					EditorGUILayout.ObjectField(property.FindPropertyRelative("choice"));
-	//					break;
-	//			}
+				switch (typeProp.enumValueIndex) {
+					case (int)MetaLoadType.None:
+						break;
+					case (int)MetaLoadType.Level:
+						EditorGUILayout.ObjectField(property.FindPropertyRelative("level"));
+						break;
+					case (int)MetaLoadType.Dialogue:
+						EditorGUILayout.ObjectField(property.FindPropertyRelative("dialogue"));
+						break;
+					case (int)MetaLoadType.Choice:
+						EditorGUILayout.ObjectField(property.FindPropertyRelative("choice"));
+						break;
+				}
 
-	//		}
+			}
 
-	//		EditorGUILayout.EndFoldoutHeaderGroup();
+			EditorGUILayout.EndFoldoutHeaderGroup();
 
-	//		EditorGUIUtility.labelWidth = width;
+			EditorGUIUtility.labelWidth = width;
 
-	//		EditorGUI.EndProperty();
+			EditorGUI.EndProperty();
 
-	//	}
+		}
 
-	//}
+	}
 
 
 
