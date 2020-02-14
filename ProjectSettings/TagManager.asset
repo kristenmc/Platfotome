@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - UI Scroll Layer
-  - 
+  - Post Processing Volumes
   - 
   - 
   - 
@@ -44,4 +44,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Text
+    uniqueID: 729863251
+    locked: 0
+  - name: Entities
+    uniqueID: 1042186273
+    locked: 0
+  - name: Player
+    uniqueID: 1108873229
     locked: 0

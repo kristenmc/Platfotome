@@ -6,8 +6,10 @@ namespace Platfotome {
 
 	public class OverworldScript : MonoBehaviour {
 
+		public Transform player;
+
 		private void Awake() {
-			CameraController.Instance.RequestTrackMode(transform);
+			CameraController.Instance.RequestTrackMode(player);
 		}
 
 	}

@@ -22,6 +22,12 @@ namespace Platfotome {
 
 		}
 
+		public static class Mask {
+
+			public const int UIScroll = 1 << 25;
+
+		}
+
 	}
 
 }

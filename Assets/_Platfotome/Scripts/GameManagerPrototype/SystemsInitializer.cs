@@ -14,7 +14,7 @@ namespace Platfotome {
 			if (initialized) return;
 
 			ScriptableDictionaryLibrary.Initialize();
-			DialogueManager.Initialize(true);
+			DialogueManager.Initialize();
 			TransitionLibrary.Initialize();
 
 			initialized = true;
