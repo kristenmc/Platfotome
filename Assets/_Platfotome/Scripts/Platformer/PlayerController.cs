@@ -16,6 +16,8 @@ namespace Platfotome {
 		Rigidbody2D rb = null;
 		Collider2D col = null;
 
+		private SpriteRenderer spriteRenderer;
+
 		bool jumping = false;
 		float holdTime = 0;
 		float horizontal = 0;
@@ -24,6 +26,7 @@ namespace Platfotome {
 		void Awake() {
 			rb = GetComponent<Rigidbody2D>();
 			col = GetComponent<Collider2D>();
+			spriteRenderer = GetComponent<SpriteRenderer>();
 		}
 
 		void Update() {
@@ -54,6 +57,12 @@ namespace Platfotome {
 					horizontal = Mathf.MoveTowards(horizontal, axis * walkSpeed, acceleration * Time.deltaTime);
 				}
 			}
+
+			// Flip the direction of the sprite depending on the horizontal velocity
+			if (Mathf.Abs(horizontal) > 0.01f) {
+				spriteRenderer.flipX = horizontal < 0f;
+			}
+
 		}
 
 		void FixedUpdate() {

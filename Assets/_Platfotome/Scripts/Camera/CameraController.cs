@@ -38,6 +38,7 @@ namespace Platfotome {
 			MainCamera = GetComponent<Camera>();
 			animator = GetComponent<Animator>();
 
+			MainCamera.cullingMask &= ~Constants.Mask.UIScroll;
 			defaultZoom = MainCamera.orthographicSize;
 			ResetProperties();
 		}

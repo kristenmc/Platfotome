@@ -22,7 +22,7 @@ namespace Platfotome {
 				GameManager.RequestStateTransition(new VisualNovelState(AllCharacterAffinities.HeMan.GetDialogueKey()));
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha3)) {
-				GameManager.RequestStateTransition(new ChoiceWorldState("test0"));
+				GameManager.RequestStateTransition(new ChoiceWorldState("ChoiceWorld"));
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha4)) {
 				GameManager.RequestStateTransition(new MainMenuState());
@@ -31,7 +31,7 @@ namespace Platfotome {
 				GameManager.RequestStateTransition(new CreditsState());
 			}
             if (Input.GetKeyDown(KeyCode.Alpha5)) {
-                GameManager.RequestStateTransition(new ChoiceWorldState("A"));
+                GameManager.RequestStateTransition(new ChoiceWorldState("ChoiceWorld_Demo"));
             }
 
             if (Input.GetKeyDown(KeyCode.Keypad0)) {
