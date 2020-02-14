@@ -52,6 +52,10 @@ namespace Platfotome.CustomEditors {
 
 	}
 
+    [CustomEditor(typeof(DialogueChoice))]
+    public class DialogueChoiceEditor : Editor { }
 
+    [CustomEditor(typeof(DialogueSequence))]
+    public class DialogueSequenceEditor : Editor { }
 
 }
