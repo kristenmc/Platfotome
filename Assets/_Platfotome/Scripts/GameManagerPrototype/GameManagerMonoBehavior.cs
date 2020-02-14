@@ -19,10 +19,10 @@ namespace Platfotome {
 				GameManager.RequestStateTransition(new OverworldState());
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha2)) {
-				GameManager.RequestStateTransition(new VisualNovelState("he_intro"));
+				GameManager.RequestStateTransition(new VisualNovelState(AllCharacterAffinities.HeMan.GetDialogueKey()));
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha3)) {
-				GameManager.RequestStateTransition(new ChoiceWorldState("test0", "Default Header"));
+				GameManager.RequestStateTransition(new ChoiceWorldState("test0"));
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha4)) {
 				GameManager.RequestStateTransition(new MainMenuState());
@@ -31,23 +31,23 @@ namespace Platfotome {
 				GameManager.RequestStateTransition(new CreditsState());
 			}
             if (Input.GetKeyDown(KeyCode.Alpha5)) {
-                GameManager.RequestStateTransition(new ChoiceWorldState("A", "Default Header"));
+                GameManager.RequestStateTransition(new ChoiceWorldState("A"));
             }
 
             if (Input.GetKeyDown(KeyCode.Keypad0)) {
-                AllCharacterAffinities.heManAffinity.RequestTransition(HeManAffinity.State.Angry);
+                AllCharacterAffinities.HeMan.RequestTransition(HeManAffinity.State.Angry);
             }
             if (Input.GetKeyDown(KeyCode.Keypad1)) {
-                AllCharacterAffinities.heManAffinity.RequestTransition(HeManAffinity.State.Happy);
+                AllCharacterAffinities.HeMan.RequestTransition(HeManAffinity.State.Happy);
             }
             if (Input.GetKeyDown(KeyCode.Keypad2)) {
-                AllCharacterAffinities.heManAffinity.RequestTransition(HeManAffinity.State.Sad);
+                AllCharacterAffinities.HeMan.RequestTransition(HeManAffinity.State.Sad);
             }
             if (Input.GetKeyDown(KeyCode.Keypad3)) {
-                AllCharacterAffinities.heManAffinity.RequestTransition(HeManAffinity.State.Reconcile);
+                AllCharacterAffinities.HeMan.RequestTransition(HeManAffinity.State.Reconcile);
             }
             if (Input.GetKeyDown(KeyCode.Keypad4)) {
-                AllCharacterAffinities.heManAffinity.RequestTransition(HeManAffinity.State.End);
+                AllCharacterAffinities.HeMan.RequestTransition(HeManAffinity.State.End);
             }
 
             GameManager.Update();

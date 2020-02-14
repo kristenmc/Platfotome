@@ -7,7 +7,7 @@ namespace Platfotome.CustomEditors {
 
 	internal static class EditorCommands {
 
-		[MenuItem("Platfotome/Play from Startup #P", priority = 0)]
+		[MenuItem("Platfotome/Play from Startup #P", priority = 50)]
 		private static void PlayFromStartup() {
 			if (!EditorApplication.isPlaying) {
 				EditorSceneManager.OpenScene("Assets/_Platfotome/Game States/Startup.unity");
@@ -24,7 +24,7 @@ namespace Platfotome.CustomEditors {
 		[MenuItem("Platfotome/Load/Choice World #3")]
 		private static void LoadChoiceWorld() => EditorSceneManager.OpenScene("Assets/_Platfotome/Game States/ChoiceWorld.unity");
 
-		[MenuItem("Platfotome/Invoke Loaded() Event #L", priority = 50)]
+		[MenuItem("Platfotome/Invoke Loaded() Event #L", priority = 51)]
 		private static void InvokeLoadEvent() {
 			if (Application.isPlaying) {
 				foreach (var item in SceneManager.GetActiveScene().GetRootGameObjects()) {

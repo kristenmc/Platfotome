@@ -99,57 +99,19 @@ namespace Platfotome.GUI {
 			}
 		}
 
-		/// <summary>
-		/// Check if the given text is an in-text load token.
-		/// </summary>
-		public static MetaLoadType GetMetaLoadType(string text) {
-			if (text.Length > 2 && text[0] == text[text.Length - 1]) {
-				if (text[0] == '$') return MetaLoadType.Dialogue;
-				if (text[0] == '%') return MetaLoadType.Choice;
-				if (text[0] == '@') return MetaLoadType.Level;
-			}
-			return MetaLoadType.None;
-		}
-
-		/// <summary>
-		/// Attempt to load the key specified in the in-text load token.
-		/// </summary>
-		public static void LoadInTextToken(string text) {
-			string key = text.Substring(1, text.Length - 2);
-			if (text[0] == '$') {
-				LoadDialogue(key);
-				DialogueScript.BeginReveal();
-			} else if (text[0] == '%') {
-				LoadChoice(key);
-			} else if (text[0] == '@') {
-				LoadLevel(key);
-			}
-		}
-
-		/// <summary>
-		/// Load the given key.
-		/// </summary>
-		public static void LoadKey(MetaLoadType type, string key) {
-			switch (type) {
-				case MetaLoadType.None:
-					Debug.Log(Prefix + $" Loadtype None: '{key}'");
-					break;
+		internal static void ExecuteMetaLoad(MetaLoadEntry entry) {
+			switch (entry.type) {
 				case MetaLoadType.Dialogue:
-					LoadDialogue(key);
+					LoadDialogue(entry.dialogue.name);
 					DialogueScript.BeginReveal();
 					break;
 				case MetaLoadType.Choice:
-					LoadChoice(key);
+					LoadChoice(entry.choice.name);
 					break;
 				case MetaLoadType.Level:
-					LoadLevel(key);
+					GameManager.RequestStateTransition(new ChoiceWorldState(entry.level.name));
 					break;
 			}
-		}
-
-		private static void LoadLevel(string fullKey) {
-			string[] parts = fullKey.Split('|');
-			GameManager.RequestStateTransition(new ChoiceWorldState(parts[0], parts.Length > 1 ? parts[1] : "(none)"));
 		}
 
 		private static bool WarnInit(string warning) {

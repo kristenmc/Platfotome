@@ -26,17 +26,21 @@ namespace Platfotome.GUI {
 
 		private string CurrentText => textSequence[curSequenceIndex];
 
+		private DialogueSequence sequence;
+
 		internal void ClearAll() {
 			Util.DestroyChildGameObjects(nameplate);
 			Util.DestroyChildGameObjects(frame);
 			Util.DestroyChildGameObjects(portrait);
 			Util.DestroyChildGameObjects(background);
 			textmesh.text = string.Empty;
+			sequence = null;
 		}
 
 		internal void LoadSequence(string key, DialogueSequence sequence) {
 
 			ClearAll();
+			this.sequence = sequence;
 
 			revealingText = false;
 			sequence.style.Resolve(out var np, out var fr, out var pt, out var bg);
@@ -78,7 +82,7 @@ namespace Platfotome.GUI {
 		public void AdvanceText() {
 			if (revealingText) {
 				SkipToEnd();
-			} else if (curSequenceIndex < textSequence.Length - 1) {
+			} else {
 				++curSequenceIndex;
 				if (CheckMetaLoad()) return;
 				textmesh.text = CurrentText;
@@ -131,13 +135,14 @@ namespace Platfotome.GUI {
 		}
 
 		private bool CheckMetaLoad() {
-			MetaLoadType type = DialogueManager.GetMetaLoadType(CurrentText);
-			if (type == MetaLoadType.Dialogue || type == MetaLoadType.Level) {
-				DialogueManager.LoadInTextToken(CurrentText);
+			if (curSequenceIndex >= textSequence.Length) {
+				if (sequence.loadEntry != null && sequence.loadEntry.type != MetaLoadType.None) {
+					if (sequence.loadEntry.type == MetaLoadType.Choice) Close();
+					DialogueManager.ExecuteMetaLoad(sequence.loadEntry);
+				} else {
+					Debug.LogWarning(Prefix + " Reached end of dialogue without specifying a load");
+				}
 				return true;
-			} else if (type == MetaLoadType.Choice) {
-				Close();
-				DialogueManager.LoadInTextToken(CurrentText);
 			}
 			return false;
 		}

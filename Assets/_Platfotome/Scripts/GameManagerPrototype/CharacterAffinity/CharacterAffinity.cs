@@ -5,8 +5,10 @@ using System.Linq;
 using UnityEngine;
 
 namespace Platfotome {
+
     public abstract class CharacterAffinity<T> where T: Enum {
-        public T CurrentStatus { get; protected set; }
+
+        public T CurrentState { get; protected set; }
         protected readonly Dictionary<T, T[]> graph = new Dictionary<T, T[]>();
         public string Name { get; }
 
@@ -15,17 +17,27 @@ namespace Platfotome {
         }
 
         public void RequestTransition(T newState) {
-            Debug.Log($"[CharacterAffinity] State transition from {CurrentStatus} to {newState}");
-            T[] edges = graph[CurrentStatus];
+            Debug.Log($"[CharacterAffinity] State transition from {CurrentState} to {newState}");
+            T[] edges = graph[CurrentState];
             if (edges.Contains(newState)) {
-                CurrentStatus = newState;
+                CurrentState = newState;
             } else {
-                Debug.LogError("[CharacterAffinity] Invalid state transition");
+                Debug.LogError($"[CharacterAffinity] Invalid state request from {CurrentState} to {newState}. Request denied.");
             }
         }
 
         protected void AddEdge(T from, params T[] to) => graph.Add(from, to);
 
-        public string GetDialogueKey() => $"{Name}_{CurrentStatus}";
+        public string GetDialogueKey() => $"{Name}_{CurrentState}";
+
+        public override string ToString() {
+            return $"CharacterAffinity('{Name}', {CurrentState})";
+        }
+
+#if UNITY_EDITOR
+        public void _Editor_SetCurrentState(Enum state) => CurrentState = (T)state;
+#endif
+
     }
+
 }

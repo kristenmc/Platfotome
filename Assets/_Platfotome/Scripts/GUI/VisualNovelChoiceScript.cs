@@ -90,13 +90,9 @@ namespace Platfotome.GUI {
 
 		private void SelectCurrentDelayed() {
 			var selection = choice[selectionIndex];
-			if (selection.loadType != MetaLoadType.None) {
-				try {
-					DialogueManager.LoadKey(selection.loadType, choice[selectionIndex].trigger);
-				} catch (Exception) {
-					Debug.LogError(Prefix + " Failed to execute choice output trigger");
-				}
-				if (!(selection.loadType == MetaLoadType.Choice || selection.loadType == MetaLoadType.Level)) {
+			if (selection.loadEntry != null && selection.loadEntry.type != MetaLoadType.None) {
+				DialogueManager.ExecuteMetaLoad(selection.loadEntry);
+				if (!(selection.loadEntry.type == MetaLoadType.Choice || selection.loadEntry.type == MetaLoadType.Level)) {
 					Close();
 				}
 			}

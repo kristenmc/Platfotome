@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878e069ba72b5724daf2a7e0ddc11dbf, type: 3}
-  m_Name: he_choice_less
+  m_Name: choice less
   m_EditorClassIdentifier: 
   style: {fileID: 11400000, guid: ad3dfc674d956cf42ad05383b4a76f1e, type: 2}
   choices:
   - text: Hell Ya
-    loadType: 1
-    trigger: he_yes
+    loadEntry:
+      type: 3
+      dialogue: {fileID: 0}
+      choice: {fileID: 0}
+      level: {fileID: 102900000, guid: 35c6bf1d079f01346ba01a060ff080b5, type: 3}
   - text: Nah Dogg
-    loadType: 3
-    trigger: he_very_angru|What did you just say to me?
+    loadEntry:
+      type: 3
+      dialogue: {fileID: 0}
+      choice: {fileID: 0}
+      level: {fileID: 102900000, guid: 35c6bf1d079f01346ba01a060ff080b5, type: 3}

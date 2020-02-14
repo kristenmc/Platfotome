@@ -1,17 +1,17 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Platfotome {
 
-    public class HeManAffinity : CharacterAffinity<HeManAffinity.State> {
+	public class TurtleAffinity : CharacterAffinity<TurtleAffinity.State> {
 
         public enum State {
             Start, Happy, Angry, End, Reconcile, Sad
         }
 
-        public HeManAffinity() :
-            base("HeMan") {
+        public TurtleAffinity() :
+            base("Turtle") {
 
             AddEdge(State.Start, State.Happy, State.Angry);
 
@@ -22,6 +22,7 @@ namespace Platfotome {
             graph.Add(State.End, new State[0]);
 
         }
+
     }
 
 }

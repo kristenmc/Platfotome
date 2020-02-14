@@ -5,13 +5,12 @@ using UnityEngine;
 namespace Platfotome.GUI {
 
 	[CreateAssetMenu(fileName = "New Dialogue Choice", menuName = "GUI Assets/Dialogue Choice", order = 112)]
-	internal class DialogueChoice : ScriptableObject {
+	public class DialogueChoice : ScriptableObject {
 
 		[Serializable]
 		public class Choice {
 			public string text = null;
-			public MetaLoadType loadType = MetaLoadType.Level;
-			public string trigger = null;
+			public MetaLoadEntry loadEntry = null;
 		}
 
 		public CharacterStyleGroup style = null;

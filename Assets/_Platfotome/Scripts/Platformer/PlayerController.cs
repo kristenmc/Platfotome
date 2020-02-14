@@ -6,7 +6,7 @@ namespace Platfotome {
 	public class PlayerController : MonoBehaviour {
 		[SerializeField] float walkSpeed = 4;
 		[SerializeField] float runSpeed = 7;
-		[SerializeField] float jump = 3;
+		//[SerializeField] float jump = 3;
 		[SerializeField] float jumpTime = 0.5f;
 		[SerializeField] float acceleration = 10;
 		[SerializeField] float decelerationFactor = 0.85f;
@@ -95,7 +95,7 @@ namespace Platfotome {
             Destroy(gameObject, 1f);
             if (GameManager.InGameState(typeof(ChoiceWorldState))) {
                 if (GameManager.StateArgs.TryGetValue(ChoiceWorldState.LevelKey, out string val)) {
-                    GameManager.RequestStateTransition(new ChoiceWorldState(val, ""));
+                    GameManager.RequestStateTransition(new ChoiceWorldState(val));
                 }
             }
         }

@@ -38,11 +38,9 @@ namespace Platfotome {
 
     public class ChoiceWorldState : GameState {
         public const string LevelKey = "level_key";
-        public const string QuestionKey = "question_key";
-        public ChoiceWorldState(string levelKey, string question) :
-            base("ChoiceWorld_" + levelKey, TransitionLibrary.GetTransition(typeof(FadeToBlack)), new TransitionArguments(0.2f, 0.1f, 0.2f)) {
+        public ChoiceWorldState(string levelKey) :
+            base(levelKey, TransitionLibrary.GetTransition(typeof(FadeToBlack)), new TransitionArguments(0.2f, 0.1f, 0.2f)) {
             Args.Add(LevelKey, levelKey);
-            Args.Add(QuestionKey, question);
         }
     }
 

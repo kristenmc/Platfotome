@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207059a5b5710d14b936ee64604bcb6a, type: 3}
-  m_Name: he_angru
+  m_Name: angru
   m_EditorClassIdentifier: 
   style: {fileID: 11400000, guid: ad3dfc674d956cf42ad05383b4a76f1e, type: 2}
   text:
   - He isn't just MAN, HE-ANGRY
-  - '%he_choice_all%'
+  loadEntry:
+    type: 2
+    dialogue: {fileID: 0}
+    choice: {fileID: 11400000, guid: def9608a594912a4bae0197ce3a2e887, type: 2}
+    level: {fileID: 0}

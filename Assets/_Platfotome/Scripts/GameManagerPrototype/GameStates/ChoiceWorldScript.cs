@@ -14,9 +14,7 @@ namespace Platfotome {
 			if (GameManager.StateArgs.TryGetValue(ChoiceWorldState.LevelKey, out string levelKey)) {
 				Debug.Log("[ChoiceWorld] Loading level " + levelKey);
 			}
-			if (GameManager.StateArgs.TryGetValue(ChoiceWorldState.QuestionKey, out string questionText)) {
-				questionTextMesh.text = questionText;
-			}
+			questionTextMesh.text = "Placeholder";
 		}
 
 		private void OnDestroy() {
