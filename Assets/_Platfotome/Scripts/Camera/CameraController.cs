@@ -8,6 +8,7 @@ namespace Platfotome {
 
 		public static CameraController Instance { get; private set; }
 		public static Camera MainCamera { get; private set; }
+        public static Action<Vector2> OnCameraMove;
 
 		private Vector2 Position {
 			get => transform.position;
@@ -61,6 +62,8 @@ namespace Platfotome {
 					Mode = CameraMode.Idle;
 					break;
 			}
+
+            OnCameraMove?.Invoke(Position);
 		}
 
 		private void DoTrack() {
