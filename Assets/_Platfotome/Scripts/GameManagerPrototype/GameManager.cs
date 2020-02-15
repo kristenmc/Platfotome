@@ -39,6 +39,7 @@ namespace Platfotome {
 
 		internal static void Initialize() {
 			SystemsInitializer.Initialize();
+			GamePreferences.Apply();
 			transitionCanvas = GameObject.FindWithTag("TransitionCanvas").transform;
 			pauseGUI = GameObject.FindWithTag("PauseCanvas").transform.GetChild(0).gameObject;
 			pauseGUI.SetActive(false);

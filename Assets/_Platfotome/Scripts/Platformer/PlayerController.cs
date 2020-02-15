@@ -101,13 +101,19 @@ namespace Platfotome {
 
         void Die() {
             enabled = false;
-            Destroy(gameObject, 1f);
-            if (GameManager.InGameState(typeof(ChoiceWorldState))) {
-                if (GameManager.StateArgs.TryGetValue(ChoiceWorldState.LevelKey, out string val)) {
-                    GameManager.RequestStateTransition(new ChoiceWorldState(val));
-                }
-            }
+			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			CameraController.Instance.RequestScreenShake(Constants.Screenshake.PlayerDeath, Vector2.down);
+			Invoke("DieInternal", 0.4f);
         }
+
+		private void DieInternal() {
+			if (GameManager.InGameState(typeof(ChoiceWorldState))) {
+				if (GameManager.StateArgs.TryGetValue(ChoiceWorldState.LevelKey, out string val)) {
+					GameManager.RequestStateTransition(new ChoiceWorldState(val));
+				}
+			}
+			Destroy(gameObject);
+		}
 
         private void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;

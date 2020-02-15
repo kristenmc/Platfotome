@@ -1,34 +1,30 @@
 #Producer
 @Henry Dang
->[TODO]
-
 
 #Audio Designer
 @Kristen Cambell
->[TODO]
-
 
 #Writers
-@Elizabeth
->[TODO]
+@Elizabeth Chen
+>Bullet Dialogue
 @Cole Melody*
->Turtle, Bullet, Spike
+>Turtle Dialogue, Spike Dialogue
 ^*Member during Spring Game Jam 2019
 
-
 #Programmers
-@Ervie Tubig
->[TODO]
 @Conan Truong
->Player Controller
-@bryan
->ui and stuff
+>Player Controller, Level Implementation
+@Bryan Sturm
+>User Interface, 
+@Ervie Tubig*
+^*Member during Spring Game Jam 2019
 
 #Designers
-@Evan C.
->[TODO]
 @Avineesh Kompella
->Game Design, Level Design
+>Game Designer, Level Design
+@Evan Cheng*
+^*Member during Spring Game Jam 2019
+
 
 
 #Artists
@@ -38,6 +34,21 @@
 >Turret Art, Spike Art
 ^*Member during Spring Game Jam 2019
 
+#Member during Spring Game Jam 2019
+@Henry Dang
+@Kristen Cambell
+@Conan Truong
+@Evan Cheng*
+@Santiago Morales
+@Cole Melody
+@Ervie Tubig
 
+#Member during Winter of 2020
+@Henry Dang
+@Kristen Cambell
+@Conan Truong
+@Bryan Sturm
+@Elizabeth
+@Avineesh Kompella
 
 #Thanks for Playing!

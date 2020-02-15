@@ -15,6 +15,23 @@ namespace Platfotome.GUI {
 
 		private void Update() {
 
+			if (Input.GetKeyDown(KeyCode.Keypad1)) CameraController.Instance.RequestScreenShake(0.1f);
+			if (Input.GetKeyDown(KeyCode.Keypad2)) CameraController.Instance.RequestScreenShake(0.3f);
+			if (Input.GetKeyDown(KeyCode.Keypad3)) CameraController.Instance.RequestScreenShake(0.7f);
+			if (Input.GetKeyDown(KeyCode.Keypad4)) CameraController.Instance.RequestScreenShake(1.5f);
+
+			if (Input.GetKeyDown(KeyCode.Keypad8)) {
+				Debug.Log("Disabling screenshake");
+				PlayerPrefs.SetFloat(GamePreferences.Key.Screenshake, 0f);
+				GamePreferences.Apply();
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad9)) {
+				Debug.Log("Enabling screenshake");
+				PlayerPrefs.SetFloat(GamePreferences.Key.Screenshake, 1f);
+				GamePreferences.Apply();
+			}
+
+
 			if (GameManager.InGameState(typeof(OverworldState))) {
 
 				if (Input.GetKeyDown(KeyCode.T)) {

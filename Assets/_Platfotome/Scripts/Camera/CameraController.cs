@@ -8,17 +8,32 @@ namespace Platfotome {
 
 		public static CameraController Instance { get; private set; }
 		public static Camera MainCamera { get; private set; }
-        public static Action<Vector2> OnCameraMove;
 
-		private Vector2 Position {
-			get => transform.position;
-			set => transform.position = new Vector3(value.x, value.y, transform.position.z);
+		/// <summary>
+		/// Raised every LateUpdate() after the camera has moved. Includes offset from screenshake.
+		/// </summary>
+		public static Action<Vector2> OnCameraMove;
+
+		/// <summary>
+		/// Raised every LateUpdate() after the camera has moved. Does not include offset from screenshake.
+		/// </summary>
+		public static Action<Vector2> OnCameraMoveRaw;
+
+
+		[SerializeField] private Vector2 m_position;
+		/// <summary>
+		/// The raw position of the camera before screenshake is applied.
+		/// <para><i>Use this property over transform.position</i></para>
+		/// </summary>
+		public Vector2 Position {
+			get => m_position;
+			set => m_position = value;
 		}
 
-		[SerializeField] private CameraMode mode;
+		[SerializeField] private CameraMode m_mode;
 		public CameraMode Mode {
-			get => mode;
-			private set => mode = value;
+			get => m_mode;
+			private set => m_mode = value;
 		}
 
 		public Transform trackTarget;
@@ -31,8 +46,11 @@ namespace Platfotome {
 
 		private float defaultZoom;
 
+		public ScreenShakeTool screenshake;
+
 		public CameraController() {
 			Instance = this;
+			screenshake = new ScreenShakeTool();
 		}
 
 		private void Awake() {
@@ -56,22 +74,38 @@ namespace Platfotome {
 					DoAnimate();
 					break;
 				case CameraMode.Map:
-					DoMap();
 					break;
 				default:
 					Mode = CameraMode.Idle;
 					break;
 			}
 
-            OnCameraMove?.Invoke(Position);
+			if (Mode != CameraMode.Animation) {
+
+				screenshake.Update();
+				Vector2 pos = Position + screenshake.Offset;
+
+				transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+
+				OnCameraMoveRaw?.Invoke(Position);
+				OnCameraMove?.Invoke(pos);
+
+			} else {
+
+				OnCameraMoveRaw?.Invoke(transform.position);
+				OnCameraMove?.Invoke(transform.position);
+
+			}
 		}
 
 		private void DoTrack() {
-			Vector2 target = trackTarget == null ? Position : trackTarget.position.GetXY();
-			if (track != null) {
-				target = track.Clamp(target);
+			if (trackTarget != null) {
+				Vector2 target = trackTarget.position;
+				if (track != null) {
+					target = track.Clamp(target);
+				}
+				Position = Vector2.SmoothDamp(Position, target, ref trackSmoothDampVel, smoothDampTime);
 			}
-			Position = Vector2.SmoothDamp(Position, target, ref trackSmoothDampVel, smoothDampTime);
 		}
 
 		private void DoAnimate() {
@@ -80,10 +114,6 @@ namespace Platfotome {
 				animator.enabled = false;
 				Mode = CameraMode.Idle;
 			}
-		}
-
-		private void DoMap() {
-
 		}
 
 		private static Rect GetChoiceWorldViewport() {
@@ -174,6 +204,25 @@ namespace Platfotome {
 			MainCamera.orthographicSize = defaultZoom;
 			Position = trackTarget.position;
 		}
+
+		/// <summary>
+		/// Request the camera begin a screenshake with given magnitude and initial direction.
+		/// </summary>
+		public void RequestScreenShake(float magnitude, Vector2 direction) {
+			if (Mode != CameraMode.Animation) {
+				screenshake.Start(magnitude, (direction.sqrMagnitude == 0 ? Vector2.down : direction).normalized);
+			}
+		}
+
+		/// <summary>
+		/// Request the camera begin a screenshake with given magnitude and a random initial direction.
+		/// </summary>
+		public void RequestScreenShake(float magnitude) => RequestScreenShake(magnitude, UnityEngine.Random.insideUnitCircle);
+
+		/// <summary>
+		/// Quickly damp current screenshake to 0.
+		/// </summary>
+		public void StopScreenShake() => screenshake.Stop();
 
 		#endregion
 

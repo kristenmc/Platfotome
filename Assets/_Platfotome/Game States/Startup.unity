@@ -549,13 +549,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2bb19cb5ff8ad4ea6ea01628dca15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 0
+  m_position: {x: 0, y: 0}
+  m_mode: 0
   trackTarget: {fileID: 0}
   smoothDampTime: 0
   track: {fileID: 0}
   animationTimer:
     duration: 0
     current: 0
+  screenshake:
+    time:
+      duration: 0.5
+      current: 1
+    dampingCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -2.1698117
+        outSlope: -2.1698117
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.05
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.12191583
+        outSlope: -0.12191583
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.2708333
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    durationScale: 0.2
+    scalePower: 0.5
+    baseDuration: 0.3
+    repeats: 1.5
+    dampAmount: 3
+    direction: {x: 0, y: 0}
+    magnitude: 0
+    stopFlag: 0
 --- !u!95 &1890999039
 Animator:
   serializedVersion: 3

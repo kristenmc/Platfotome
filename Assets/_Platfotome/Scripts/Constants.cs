@@ -28,6 +28,12 @@ namespace Platfotome {
 
 		}
 
+		public static class Screenshake {
+
+			public const float PlayerDeath = 0.3f;
+
+		}
+
 	}
 
 }
