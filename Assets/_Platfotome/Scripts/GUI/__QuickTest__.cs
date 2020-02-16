@@ -13,6 +13,8 @@ namespace Platfotome.GUI {
 
 		}
 
+		float val;
+
 		private void Update() {
 
 			if (Input.GetKeyDown(KeyCode.Keypad1)) CameraController.Instance.RequestScreenShake(0.1f);

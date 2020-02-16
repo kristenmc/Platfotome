@@ -8,6 +8,8 @@ TagManager:
   - SceneCamera
   - ChoiceWorldViewport
   - PauseCanvas
+  - MainCanvas
+  - TrackTarget
   layers:
   - Default
   - TransparentFX

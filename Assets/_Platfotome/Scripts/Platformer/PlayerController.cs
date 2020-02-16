@@ -6,7 +6,7 @@ namespace Platfotome {
 	public class PlayerController : MonoBehaviour {
 		[SerializeField] float walkSpeed = 4;
 		[SerializeField] float runSpeed = 7;
-		//[SerializeField] float jump = 3;
+		[SerializeField] float jump = 3;
 		[SerializeField] float jumpTime = 0.5f;
 		[SerializeField] float acceleration = 10;
 		[SerializeField] float decelerationFactor = 0.85f;
@@ -30,7 +30,7 @@ namespace Platfotome {
 		}
 
 		void Update() {
-			if (Input.GetButtonDown("Jump") && isGrounded()) {
+			if (Input.GetButtonDown("Jump") && IsGrounded()) {
 				jumping = true;
 				holdTime = jumpTime;
 			} else if (Input.GetButton("Jump") && holdTime > 0) {
@@ -42,13 +42,13 @@ namespace Platfotome {
 
 			axis = Input.GetAxisRaw("Horizontal");
 
-			if (horizontal * axis < 0 && Mathf.Abs(horizontal) > 0.2f && isGrounded()) {
+			if (horizontal * axis < 0 && Mathf.Abs(horizontal) > 0.2f && IsGrounded()) {
 				horizontal = 0;
 			}
 
 			if (axis != 0) {
 				if (Input.GetButton("Fire1")) {
-					if (isGrounded()) {
+					if (IsGrounded()) {
 						horizontal = Mathf.MoveTowards(horizontal, axis * runSpeed, acceleration * Time.deltaTime);
 					} else if (Mathf.Abs(horizontal) < walkSpeed) {
 						horizontal = Mathf.MoveTowards(horizontal, axis * walkSpeed, acceleration * Time.deltaTime);
@@ -78,7 +78,7 @@ namespace Platfotome {
 			}
 
 			if (jumping) {
-				velocity.y = 5;
+				velocity.y = jump;
 			}
 
 			rb.velocity = velocity;
@@ -88,7 +88,7 @@ namespace Platfotome {
             }
 		}
 
-		public bool isGrounded() {
+		public bool IsGrounded() {
 			RaycastHit2D hit = Physics2D.BoxCast(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x, 0.01f), 0, Vector2.down, 0.01f, groundCheckLayers.value);
 			return hit.transform != null;
 		}

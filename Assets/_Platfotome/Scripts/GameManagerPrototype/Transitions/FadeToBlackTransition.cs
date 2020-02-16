@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Platfotome {
 
-	public class FadeToBlack : Transition {
+	public class FadeToBlackTransition : Transition {
 
 		private Image image;
 

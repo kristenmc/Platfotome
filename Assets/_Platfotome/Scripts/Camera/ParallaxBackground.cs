@@ -3,21 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Platfotome {
-    public class ParallaxBackground : MonoBehaviour {
-        [SerializeField] float parallax = 0.95f;
-        [SerializeField] float origin = 0;
 
-        void Awake() {
-            CameraController.OnCameraMove += UpdatePosition;
-        }
+	public class ParallaxBackground : MonoBehaviour {
+		[SerializeField] float parallax = 0.95f;
+		[SerializeField] public bool doX = true;
+		[SerializeField] public bool doY = true;
+		
+		private Vector2 origin = Vector2.zero;
 
-        void UpdatePosition(Vector2 position) {
-            transform.position = Vector2.right * (position.x * parallax + origin);
-        }
+		void Awake() {
+			CameraController.OnCameraMove += UpdatePosition;
+			origin = transform.position;
+		}
 
-        private void OnDestroy() {
-            CameraController.OnCameraMove -= UpdatePosition;
-        }
-    }
+		void UpdatePosition(Vector2 position) {
+			Vector2 unit = Vector2.zero;
+			if (doX) unit.x = 1;
+			if (doY) unit.y = 1;
+
+			transform.position = unit * (position * parallax) + origin;
+		}
+
+		private void OnDestroy() {
+			CameraController.OnCameraMove -= UpdatePosition;
+		}
+
+	}
 
 }

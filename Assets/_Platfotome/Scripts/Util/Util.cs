@@ -33,6 +33,20 @@ namespace Platfotome {
 		/// </summary>
 		public static Vector2 GetXY(this Vector3 vector3) => new Vector2(vector3.x, vector3.y);
 
+		/// <summary>
+		/// Loop a float between [min, max]
+		/// </summary>
+		public static float Loop(float value, float min, float max) {
+			return (value - min) % (max - min) + min;
+		}
+
+		/// <summary>
+		/// Loop a Vector2 between [min, max]
+		/// </summary>
+		public static Vector2 Loop(Vector2 value, Vector2 min, Vector2 max) {
+			return new Vector2(Loop(value.x, min.x, max.x), Loop(value.y, min.y, max.y));
+		}
+
 	}
 
 }
