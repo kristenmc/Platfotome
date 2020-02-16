@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Timers;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,22 +8,24 @@ namespace Platfotome.CustomEditors {
 
 	internal static class EditorCommands {
 
-		[MenuItem("Platfotome/Play from Startup #P", priority = 50)]
-		private static void PlayFromStartup() {
-			if (!EditorApplication.isPlaying) {
-				EditorSceneManager.OpenScene("Assets/_Platfotome/Game States/Startup.unity");
-				EditorApplication.EnterPlaymode();
-			}
+		[InitializeOnLoadMethod]
+		private static void SetStartupScene() {
+			EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/_Platfotome/Game States/Startup.unity");
+		}
+
+		private static void Load(string name) {
+			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+			EditorSceneManager.OpenScene($"Assets/_Platfotome/Game States/{name}.unity");
 		}
 
 		[MenuItem("Platfotome/Load/Startup #S")]
-		private static void LoadStartup() => EditorSceneManager.OpenScene("Assets/_Platfotome/Game States/Startup.unity");
+		private static void LoadStartup() => Load("Startup");
 		[MenuItem("Platfotome/Load/Overworld #1")]
-		private static void LoadOverworld() => EditorSceneManager.OpenScene("Assets/_Platfotome/Game States/Overworld.unity");
+		private static void LoadOverworld() => Load("Overworld");
 		[MenuItem("Platfotome/Load/Visual Novel #2")]
-		private static void LoadVisualNovel() => EditorSceneManager.OpenScene("Assets/_Platfotome/Game States/VisualNovel.unity");
+		private static void LoadVisualNovel() => Load("VisualNovel");
 		[MenuItem("Platfotome/Load/Choice World #3")]
-		private static void LoadChoiceWorld() => EditorSceneManager.OpenScene("Assets/_Platfotome/Game States/ChoiceWorld.unity");
+		private static void LoadChoiceWorld() => Load("ChoiceWorld");
 
 		[MenuItem("Platfotome/Invoke Loaded() Event #L", priority = 51)]
 		private static void InvokeLoadEvent() {
