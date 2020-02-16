@@ -10,6 +10,7 @@ TagManager:
   - PauseCanvas
   - MainCanvas
   - TrackTarget
+  - IconCanvas
   layers:
   - Default
   - TransparentFX

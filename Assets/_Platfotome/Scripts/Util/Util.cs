@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace Platfotome {
@@ -45,6 +46,19 @@ namespace Platfotome {
 		/// </summary>
 		public static Vector2 Loop(Vector2 value, Vector2 min, Vector2 max) {
 			return new Vector2(Loop(value.x, min.x, max.x), Loop(value.y, min.y, max.y));
+		}
+
+		public static Color FromHex(string hex) {
+			hex = hex.TrimStart('#');
+			return new Color(
+				int.Parse(hex.Substring(0, 2), NumberStyles.HexNumber) / 255f,
+				int.Parse(hex.Substring(2, 2), NumberStyles.HexNumber) / 255f,
+				int.Parse(hex.Substring(4, 2), NumberStyles.HexNumber) / 255f);
+		}
+
+		public static Color SetAlpha(Color color, float amount) {
+			color.a = amount;
+			return color;
 		}
 
 	}
