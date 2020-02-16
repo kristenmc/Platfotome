@@ -12,14 +12,19 @@ namespace Platfotome {
 		[SerializeField] float decelerationFactor = 0.85f;
 		[SerializeField] LayerMask groundCheckLayers = 1 << 8;
         [SerializeField] float minYPosition = -50;
+        [SerializeField] float jumpBuffer = 0.2f;
+        [SerializeField] float coyoteTime = 0.15f;
 
 		Rigidbody2D rb = null;
 		Collider2D col = null;
 
 		private SpriteRenderer spriteRenderer;
 
+        float jumpButton = 0;
 		bool jumping = false;
 		float holdTime = 0;
+        float airTime = 0;
+
 		float horizontal = 0;
 		float axis = 0;
 
@@ -30,10 +35,10 @@ namespace Platfotome {
 		}
 
 		void Update() {
-			if (Input.GetButtonDown("Jump") && IsGrounded()) {
+			if (jumpButton > 0 && airTime < coyoteTime) {
 				jumping = true;
 				holdTime = jumpTime;
-			} else if (Input.GetButton("Jump") && holdTime > 0) {
+			} else if (jumpButton > 0 && holdTime > 0) {
 				holdTime -= Time.deltaTime;
 			} else {
 				jumping = false;
@@ -42,13 +47,13 @@ namespace Platfotome {
 
 			axis = Input.GetAxisRaw("Horizontal");
 
-			if (horizontal * axis < 0 && Mathf.Abs(horizontal) > 0.2f && IsGrounded()) {
+			if (horizontal * axis < 0 && Mathf.Abs(horizontal) > 0.2f && airTime == 0) {
 				horizontal = 0;
 			}
 
 			if (axis != 0) {
 				if (Input.GetButton("Fire1")) {
-					if (IsGrounded()) {
+					if (airTime == 0) {
 						horizontal = Mathf.MoveTowards(horizontal, axis * runSpeed, acceleration * Time.deltaTime);
 					} else if (Mathf.Abs(horizontal) < walkSpeed) {
 						horizontal = Mathf.MoveTowards(horizontal, axis * walkSpeed, acceleration * Time.deltaTime);
@@ -57,6 +62,12 @@ namespace Platfotome {
 					horizontal = Mathf.MoveTowards(horizontal, axis * walkSpeed, acceleration * Time.deltaTime);
 				}
 			}
+
+            if (Input.GetButtonDown("Jump")) {
+                jumpButton = jumpBuffer;
+            } else {
+                jumpButton -= Time.deltaTime;
+            }
 
 			// Flip the direction of the sprite depending on the horizontal velocity
 			if (Mathf.Abs(horizontal) > 0.01f) {
@@ -85,6 +96,12 @@ namespace Platfotome {
 
             if (rb.position.y < minYPosition) {
                 Die();
+            }
+
+            if (IsGrounded()) {
+                airTime = 0;
+            } else {
+                airTime += Time.fixedDeltaTime;
             }
 		}
 
