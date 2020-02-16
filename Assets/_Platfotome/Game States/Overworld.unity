@@ -954,20 +954,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 426977829}
     m_ColliderPaths:
-    - - X: 170000000
-        Y: 0
-      - X: -140000000
-        Y: 0
-      - X: -140000000
-        Y: -20000000
-      - X: 170000000
-        Y: -20000000
+    - - X: -139864992
+        Y: 4999
+      - X: -139864992
+        Y: -19985002
+      - X: 169835008
+        Y: -19985002
+      - X: 169835008
+        Y: 4999
   m_CompositePaths:
     m_Paths:
-    - - {x: 16.999971, y: -2}
-      - {x: 16.999971, y: 0}
-      - {x: -14, y: -0.000029300001}
-      - {x: -13.999971, y: -2}
+    - - {x: 16.983473, y: -1.9985002}
+      - {x: 16.983473, y: 0.0004999}
+      - {x: -13.9865, y: 0.0004706}
+      - {x: -13.98647, y: -1.9985002}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &426977828
@@ -2694,7 +2694,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127202679}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellSize: {x: 0.999, y: 0.999, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
