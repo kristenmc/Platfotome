@@ -128,7 +128,7 @@ TextureImporter:
       name: player_run 1_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 33
         y: 0
         width: 32
         height: 32
@@ -149,7 +149,7 @@ TextureImporter:
       name: player_run 1_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 66
         y: 0
         width: 32
         height: 32
@@ -170,7 +170,7 @@ TextureImporter:
       name: player_run 1_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 99
         y: 0
         width: 32
         height: 32
@@ -191,7 +191,7 @@ TextureImporter:
       name: player_run 1_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 132
         y: 0
         width: 32
         height: 32
@@ -212,7 +212,7 @@ TextureImporter:
       name: player_run 1_5
       rect:
         serializedVersion: 2
-        x: 160
+        x: 165
         y: 0
         width: 32
         height: 32

@@ -116,7 +116,7 @@ TextureImporter:
       name: player_jump 1_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 33
         y: 0
         width: 32
         height: 32

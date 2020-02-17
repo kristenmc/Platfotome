@@ -17,6 +17,7 @@ namespace Platfotome {
 
 		Rigidbody2D rb = null;
 		Collider2D col = null;
+        Animator anim = null;
 
 		private SpriteRenderer spriteRenderer;
 
@@ -31,6 +32,7 @@ namespace Platfotome {
 		void Awake() {
 			rb = GetComponent<Rigidbody2D>();
 			col = GetComponent<Collider2D>();
+            anim = GetComponent<Animator>();
 			spriteRenderer = GetComponent<SpriteRenderer>();
 		}
 
@@ -88,19 +90,25 @@ namespace Platfotome {
 				}
 			}
 
+            anim.SetFloat("Horizontal", Mathf.Abs(horizontal));
+
 			if (jumping) {
 				velocity.y = jump;
 			}
 
-			rb.velocity = velocity;
+            anim.SetFloat("Vertical", jump);
+
+            rb.velocity = velocity;
 
             if (rb.position.y < minYPosition) {
                 Die();
             }
 
             if (IsGrounded()) {
+                anim.SetBool("Grounded", true);
                 airTime = 0;
             } else {
+                anim.SetBool("Grounded", false);
                 airTime += Time.fixedDeltaTime;
             }
 		}
