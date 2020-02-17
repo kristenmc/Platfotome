@@ -40,7 +40,7 @@ namespace Platfotome {
 			if (jumpButton > 0 && airTime < coyoteTime) {
 				jumping = true;
 				holdTime = jumpTime;
-			} else if (jumpButton > 0 && holdTime > 0) {
+			} else if (Input.GetButton("Jump") && holdTime > 0) {
 				holdTime -= Time.deltaTime;
 			} else {
 				jumping = false;
