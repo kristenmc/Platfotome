@@ -57,7 +57,7 @@ namespace Platfotome {
 				if (Input.GetButton("Fire1")) {
 					if (airTime == 0) {
 						horizontal = Mathf.MoveTowards(horizontal, axis * runSpeed, acceleration * Time.deltaTime);
-					} else if (Mathf.Abs(horizontal) < walkSpeed) {
+					} else if (horizontal * Mathf.Sign(axis) < walkSpeed) {
 						horizontal = Mathf.MoveTowards(horizontal, axis * walkSpeed, acceleration * Time.deltaTime);
 					}
 				} else {
@@ -125,6 +125,7 @@ namespace Platfotome {
         }
 
         void Die() {
+            anim.SetTrigger("Die");
             enabled = false;
 			rb.constraints = RigidbodyConstraints2D.FreezeAll;
 			CameraController.Instance.RequestScreenShake(Constants.Screenshake.PlayerDeath, Vector2.down);
