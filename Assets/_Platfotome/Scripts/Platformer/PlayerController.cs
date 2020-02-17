@@ -96,7 +96,7 @@ namespace Platfotome {
 				velocity.y = jump;
 			}
 
-            anim.SetFloat("Vertical", jump);
+            anim.SetFloat("Vertical", velocity.y);
 
             rb.velocity = velocity;
 
