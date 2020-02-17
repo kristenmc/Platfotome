@@ -61,6 +61,10 @@ namespace Platfotome {
 			return color;
 		}
 
+		public static void SetAlpha(ref Color color, float amount) {
+			color.a = amount;
+		}
+
 	}
 
 }

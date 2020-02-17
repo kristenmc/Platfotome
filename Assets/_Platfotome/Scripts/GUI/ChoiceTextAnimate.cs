@@ -8,6 +8,7 @@ namespace Platfotome {
 
 		public float amplitude = 2f;
 		public float period = 3f;
+		public float offset = 0f;
 		private Vector2 startPos;
 
 		private Vector2 Position {
@@ -15,12 +16,12 @@ namespace Platfotome {
 			set => transform.position = value;
 		}
 
-		private void Awake() {
+		private void Start() {
 			startPos = Position;
 		}
 
 		private void Update() {
-			Position = startPos + new Vector2(0, amplitude * Mathf.Pow(Mathf.Sin(2 * Mathf.PI * Time.time / period), 2));
+			Position = startPos + new Vector2(0, amplitude * Mathf.Pow(Mathf.Sin(2 * Mathf.PI * (Time.time + offset) / period), 2));
 		}
 
 	}

@@ -17,10 +17,11 @@ namespace Platfotome.GUI {
 
 		private void Update() {
 
-			if (Input.GetKeyDown(KeyCode.Keypad1)) CameraController.Instance.RequestScreenShake(0.1f);
-			if (Input.GetKeyDown(KeyCode.Keypad2)) CameraController.Instance.RequestScreenShake(0.3f);
-			if (Input.GetKeyDown(KeyCode.Keypad3)) CameraController.Instance.RequestScreenShake(0.7f);
-			if (Input.GetKeyDown(KeyCode.Keypad4)) CameraController.Instance.RequestScreenShake(1.5f);
+			if (Input.GetKeyDown(KeyCode.Keypad1)) HealthDisplay.Instance.SetHealth(0);
+			if (Input.GetKeyDown(KeyCode.Keypad2)) HealthDisplay.Instance.SetHealth(1);
+			if (Input.GetKeyDown(KeyCode.Keypad3)) HealthDisplay.Instance.SetHealth(2);
+			if (Input.GetKeyDown(KeyCode.Keypad4)) HealthDisplay.Instance.SetHealth(3);
+			if (Input.GetKeyDown(KeyCode.Keypad5)) HealthDisplay.Instance.SetHealth(4);
 
 			if (Input.GetKeyDown(KeyCode.Keypad8)) {
 				Debug.Log("Disabling screenshake");
