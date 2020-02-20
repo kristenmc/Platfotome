@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Platfotome {
 	public class PlayerController : MonoBehaviour {
+        public static PlayerController Instance { get; private set; }
+
 		[SerializeField] float walkSpeed = 4;
 		[SerializeField] float runSpeed = 7;
 		[SerializeField] float jump = 3;
@@ -30,7 +32,8 @@ namespace Platfotome {
 		float axis = 0;
 
 		void Awake() {
-			rb = GetComponent<Rigidbody2D>();
+            Instance = this;
+            rb = GetComponent<Rigidbody2D>();
 			col = GetComponent<Collider2D>();
             anim = GetComponent<Animator>();
 			spriteRenderer = GetComponent<SpriteRenderer>();
@@ -114,9 +117,8 @@ namespace Platfotome {
 		}
 
 		public bool IsGrounded() {
-			RaycastHit2D hit = Physics2D.BoxCast(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x, 0.01f), 0, Vector2.down, 0.01f, groundCheckLayers.value);
-			return hit.transform != null;
-		}
+            return Physics2D.OverlapBox(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x - 0.1f, 0.01f), 0, groundCheckLayers.value) != null;
+        }
 
         void OnTriggerEnter2D(Collider2D collision) {
             if (collision.gameObject.layer == 9) {
@@ -124,10 +126,10 @@ namespace Platfotome {
             }
         }
 
-        void Die() {
+        public void Die() {
             anim.SetTrigger("Die");
             enabled = false;
-			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            rb.simulated = false;
 			CameraController.Instance.RequestScreenShake(Constants.Screenshake.PlayerDeath, Vector2.down);
 			Invoke("DieInternal", 0.4f);
         }
@@ -144,6 +146,10 @@ namespace Platfotome {
         private void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(new Vector3(-100, minYPosition), new Vector3(200, 0));
+        }
+
+        private void OnDestroy() {
+            Instance = null;
         }
     }
 }
