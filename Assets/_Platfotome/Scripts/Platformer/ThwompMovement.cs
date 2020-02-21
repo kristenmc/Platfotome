@@ -61,6 +61,15 @@ namespace Platfotome {
         private void OnCollisionEnter2D(Collision2D collision) {
             if (state == State.Fall) {
                 if (((1 << collision.gameObject.layer) & groundCheckLayers.value) != 0) {
+                    List<ContactPoint2D> contactList = new List<ContactPoint2D>();
+                    collision.GetContacts(contactList);
+
+                    foreach (ContactPoint2D point in contactList) {
+                        if (point.point.y == contactList[0].point.y && point.point.y > rb.position.y) {
+                            return;
+                        }
+                    }
+
                     groundWait.Start();
                     state = State.Landed;
                     rb.velocity = Vector2.zero;
@@ -87,7 +96,7 @@ namespace Platfotome {
                     collision.GetContacts(contactList);
 
                     foreach (ContactPoint2D point in contactList) {
-                        if (point.point.y != contactList[0].point.y || point.point.y > rb.position.y) {
+                        if (point.point.y == contactList[0].point.y && point.point.y > rb.position.y) {
                             return;
                         }
                     }
