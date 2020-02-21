@@ -14563,6 +14563,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd25705600ab7e42a44c8778c49935c, type: 3}
+--- !u!1001 &849766057970991025
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 849766059062569394, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_Name
+      value: Lava Particle
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 849766059062569399, guid: b4b73918833f33f4f82d464d8f07b63f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b4b73918833f33f4f82d464d8f07b63f, type: 3}
 --- !u!1001 &4970882389809330679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14711,7 +14780,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
@@ -16543,7 +16612,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 1

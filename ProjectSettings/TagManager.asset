@@ -57,3 +57,6 @@ TagManager:
   - name: Player
     uniqueID: 1108873229
     locked: 0
+  - name: Lighting Effects
+    uniqueID: 4076553327
+    locked: 0

@@ -130,7 +130,7 @@ namespace Platfotome {
             anim.SetTrigger("Die");
             enabled = false;
             rb.simulated = false;
-			CameraController.Instance.RequestScreenShake(Constants.Screenshake.PlayerDeath, Vector2.down);
+			CameraController.Instance.RequestScreenShake(Constants.Screenshake.PlayerDeath);
 			Invoke("DieInternal", 0.4f);
         }
 
