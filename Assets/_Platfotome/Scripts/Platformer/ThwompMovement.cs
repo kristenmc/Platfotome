@@ -8,6 +8,7 @@ namespace Platfotome {
         [SerializeField] float raiseSpeed = 2;
         [SerializeField] SimpleTimer groundWait = new SimpleTimer(1);
         [SerializeField] LayerMask groundCheckLayers = (1 << 8) | (1 << 9);
+        [SerializeField] float edgeWidth = 0.5f;
 
         Vector2 initPosition = Vector2.zero;
 
@@ -75,16 +76,7 @@ namespace Platfotome {
                     rb.velocity = Vector2.zero;
                     rb.bodyType = RigidbodyType2D.Kinematic;
                 } else if (collision.gameObject == player.gameObject && player.IsGrounded()) {
-                    List<ContactPoint2D> contactList = new List<ContactPoint2D>();
-                    collision.GetContacts(contactList);
-
-                    foreach (ContactPoint2D point in contactList) {
-                        if (point.point.y == contactList[0].point.y && point.point.y > rb.position.y) {
-                            return;
-                        }
-                    }
-
-                    player.Die();
+                    PlayerCollide(collision);
                 }
             }
         }
@@ -92,17 +84,29 @@ namespace Platfotome {
         private void OnCollisionStay2D(Collision2D collision) {
             if (state == State.Fall) {
                 if (collision.gameObject == player.gameObject && player.IsGrounded()) {
-                    List<ContactPoint2D> contactList = new List<ContactPoint2D>();
-                    collision.GetContacts(contactList);
-
-                    foreach (ContactPoint2D point in contactList) {
-                        if (point.point.y == contactList[0].point.y && point.point.y > rb.position.y) {
-                            return;
-                        }
-                    }
-
-                    player.Die();
+                    PlayerCollide(collision);
                 }
+            }
+        }
+
+        void PlayerCollide(Collision2D collision) {
+            ContactPoint2D[] contactList = new ContactPoint2D[collision.contactCount];
+            collision.GetContacts(contactList);
+
+            float dist = 0;
+
+            for (int i = 0; i < collision.contactCount; i++) {
+                ContactPoint2D point = contactList[i];
+                if (point.point.y != contactList[0].point.y || point.point.y > rb.position.y) {
+                    return;
+                }
+                dist += Mathf.Abs(point.point.x - contactList[0].point.x);
+            }
+
+            if (dist > edgeWidth) {
+                player.Die();
+            } else {
+                playerRb.MovePosition(playerRb.position + Vector2.right * dist / 2 * Mathf.Sign(playerRb.position.x - rb.position.x));
             }
         }
     }
