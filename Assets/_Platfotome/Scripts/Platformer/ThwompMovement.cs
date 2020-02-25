@@ -97,7 +97,7 @@ namespace Platfotome {
 
             for (int i = 0; i < collision.contactCount; i++) {
                 ContactPoint2D point = contactList[i];
-                if (point.point.y != contactList[0].point.y || point.point.y > rb.position.y) {
+                if (Mathf.Abs(point.point.y - contactList[0].point.y) > 0.01f || point.point.y > rb.position.y) {
                     return;
                 }
                 dist += Mathf.Abs(point.point.x - contactList[0].point.x);

@@ -147,14 +147,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 8
   runSpeed: 15
-  jump: 10
-  jumpTime: 0.15
+  jump: 7
+  jumpTime: 1.5
+  gravityScaleOnHold: 0.2
+  maxFallSpeed: 20
   acceleration: 60
   decelerationFactor: 0.85
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 256
-  minYPosition: -20
+  minYPosition: -50
   jumpBuffer: 0.2
   coyoteTime: 0.15
 --- !u!95 &8566803628693584766

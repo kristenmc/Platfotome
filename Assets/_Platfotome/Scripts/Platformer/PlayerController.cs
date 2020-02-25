@@ -6,14 +6,16 @@ namespace Platfotome {
 	public class PlayerController : MonoBehaviour {
         public static PlayerController Instance { get; private set; }
 
-		[SerializeField] float walkSpeed = 4;
-		[SerializeField] float runSpeed = 7;
-		[SerializeField] float jump = 3;
-		[SerializeField] float jumpTime = 0.5f;
-		[SerializeField] float acceleration = 10;
+		[SerializeField] float walkSpeed = 8f;
+		[SerializeField] float runSpeed = 15f;
+		[SerializeField] float jump = 7f;
+		[SerializeField] float jumpTime = 1.5f;
+        [SerializeField] float gravityScaleOnHold = 0.2f;
+        [SerializeField] float maxFallSpeed = 20f;
+		[SerializeField] float acceleration = 60f;
 		[SerializeField] float decelerationFactor = 0.85f;
 		[SerializeField] LayerMask groundCheckLayers = 1 << 8;
-        [SerializeField] float minYPosition = -50;
+        [SerializeField] float minYPosition = -50f;
         [SerializeField] float jumpBuffer = 0.2f;
         [SerializeField] float coyoteTime = 0.15f;
 
@@ -42,11 +44,11 @@ namespace Platfotome {
 		void Update() {
 			if (jumpButton > 0 && airTime < coyoteTime) {
 				jumping = true;
+                jumpButton = 0;
 				holdTime = jumpTime;
 			} else if (Input.GetButton("Jump") && holdTime > 0) {
 				holdTime -= Time.deltaTime;
 			} else {
-				jumping = false;
 				holdTime = 0;
 			}
 
@@ -97,15 +99,22 @@ namespace Platfotome {
 
 			if (jumping) {
 				velocity.y = jump;
+                jumping = false;
 			}
+
+            if (velocity.y < -maxFallSpeed) {
+                velocity.y = -maxFallSpeed;
+            }
+
+            if (holdTime > 0) {
+                rb.gravityScale = Mathf.Lerp(1, gravityScaleOnHold, holdTime / jumpTime);
+            } else {
+                rb.gravityScale = 1f;
+            }
 
             anim.SetFloat("Vertical", velocity.y);
 
             rb.velocity = velocity;
-
-            if (rb.position.y < minYPosition) {
-                Die();
-            }
 
             if (IsGrounded()) {
                 anim.SetBool("Grounded", true);
@@ -114,10 +123,14 @@ namespace Platfotome {
                 anim.SetBool("Grounded", false);
                 airTime += Time.fixedDeltaTime;
             }
-		}
+
+            if (rb.position.y < minYPosition) {
+                Die();
+            }
+        }
 
 		public bool IsGrounded() {
-            return Physics2D.OverlapBox(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x - 0.1f, 0.01f), 0, groundCheckLayers.value) != null;
+            return Physics2D.OverlapBox(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x - 0.2f, 0.01f), 0, groundCheckLayers.value) != null;
         }
 
         void OnTriggerEnter2D(Collider2D collision) {
@@ -150,6 +163,28 @@ namespace Platfotome {
 
         private void OnDestroy() {
             Instance = null;
+        }
+
+        private void OnCollisionStay2D(Collision2D collision) {
+            if (((1 << collision.gameObject.layer) & groundCheckLayers.value) != 0) {
+                ContactPoint2D[] contactList = new ContactPoint2D[collision.contactCount];
+                collision.GetContacts(contactList);
+
+                float dist = 0;
+
+                for (int i = 0; i < collision.contactCount; i++) {
+                    ContactPoint2D point = contactList[i];
+
+                    if (Mathf.Abs(point.point.y - contactList[0].point.y) > 0.01f || point.point.y > rb.position.y) {
+                        return;
+                    }
+                    dist += Mathf.Abs(point.point.x - contactList[0].point.x);
+                }
+                
+                if (dist < 0.11f && (contactList[0].point.x - rb.position.x) * horizontal >= 0) {
+                    rb.MovePosition(rb.position + (contactList[0].point.x < rb.position.x ? Vector2.left : Vector2.right) * (0.11f - dist));
+                }
+            }
         }
     }
 }
