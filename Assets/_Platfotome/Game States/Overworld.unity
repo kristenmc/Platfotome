@@ -287,6 +287,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &49576097
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -517,6 +518,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &69010028
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -667,6 +669,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &108350880
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -913,6 +916,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &232335546
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4360,6 +4364,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &430032330
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4422,6 +4427,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2103225550}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &435861061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435861063}
+  - component: {fileID: 435861062}
+  m_Layer: 0
+  m_Name: Death Barrier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &435861062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435861061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa155c968477ab468b61c197bcf39b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &435861063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435861061}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &501311027
 GameObject:
@@ -8044,6 +8092,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &902144617
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8194,6 +8243,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &949748855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8503,6 +8553,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &1253721624
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9161,6 +9212,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 768
+  edgeWidth: 0.5
 --- !u!212 &2019998361
 SpriteRenderer:
   m_ObjectHideFlags: 0

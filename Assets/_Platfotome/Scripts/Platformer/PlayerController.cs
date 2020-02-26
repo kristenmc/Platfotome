@@ -15,7 +15,6 @@ namespace Platfotome {
 		[SerializeField] float acceleration = 60f;
 		[SerializeField] float decelerationFactor = 0.85f;
 		[SerializeField] LayerMask groundCheckLayers = 1 << 8;
-        [SerializeField] float minYPosition = -50f;
         [SerializeField] float jumpBuffer = 0.2f;
         [SerializeField] float coyoteTime = 0.15f;
 
@@ -123,14 +122,10 @@ namespace Platfotome {
                 anim.SetBool("Grounded", false);
                 airTime += Time.fixedDeltaTime;
             }
-
-            if (rb.position.y < minYPosition) {
-                Die();
-            }
         }
 
 		public bool IsGrounded() {
-            return Physics2D.OverlapBox(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x - 0.2f, 0.01f), 0, groundCheckLayers.value) != null;
+            return Physics2D.OverlapBox(new Vector2(col.bounds.center.x, col.bounds.min.y), new Vector2(col.bounds.size.x - 0.15f, 0.01f), 0, groundCheckLayers.value) != null;
         }
 
         void OnTriggerEnter2D(Collider2D collision) {
@@ -156,11 +151,6 @@ namespace Platfotome {
 			Destroy(gameObject);
 		}
 
-        private void OnDrawGizmosSelected() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(new Vector3(-100, minYPosition), new Vector3(200, 0));
-        }
-
         private void OnDestroy() {
             Instance = null;
         }
@@ -181,8 +171,8 @@ namespace Platfotome {
                     dist += Mathf.Abs(point.point.x - contactList[0].point.x);
                 }
                 
-                if (dist < 0.11f && (contactList[0].point.x - rb.position.x) * horizontal >= 0) {
-                    rb.MovePosition(rb.position + (contactList[0].point.x < rb.position.x ? Vector2.left : Vector2.right) * (0.11f - dist));
+                if (dist < 0.15f && (contactList[0].point.x - rb.position.x) * horizontal >= 0) {
+                    rb.MovePosition(rb.position + (contactList[0].point.x < rb.position.x ? Vector2.left : Vector2.right) * (0.15f - dist));
                 }
             }
         }
