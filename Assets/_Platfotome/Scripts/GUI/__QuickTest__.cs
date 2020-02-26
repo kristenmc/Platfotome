@@ -6,8 +6,17 @@ namespace Platfotome.GUI {
 
 	public class __QuickTest__ : MonoBehaviour {
 
-		public AnimationClip c;
+		private InputWrapper controls;
+
+		public AnimationClip camClip;
 		private bool zoomed;
+
+		private void Awake() {
+			controls = new InputWrapper();
+			controls.Enable();
+
+			controls.Player.Fire.performed += context => Debug.Log("Fire");
+		}
 
 		private void Start() {
 
@@ -38,7 +47,7 @@ namespace Platfotome.GUI {
 			if (GameManager.InGameState(typeof(OverworldState))) {
 
 				if (Input.GetKeyDown(KeyCode.T)) {
-					CameraController.Instance.RequestAnimation(c);
+					CameraController.Instance.RequestAnimation(camClip);
 				}
 
 				if (Input.GetKeyDown(KeyCode.Y)) {
