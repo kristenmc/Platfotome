@@ -65,6 +65,11 @@ namespace Platfotome {
 			color.a = amount;
 		}
 
+        public static void SetVelocityY(this Rigidbody2D rb, float y) {
+            Vector2 velocity = rb.velocity;
+            velocity.y = y;
+            rb.velocity = velocity;
+        }
 	}
 
 }

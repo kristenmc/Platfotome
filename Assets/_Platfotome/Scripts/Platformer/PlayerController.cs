@@ -139,7 +139,11 @@ namespace Platfotome {
             enabled = false;
             rb.simulated = false;
 			CameraController.Instance.RequestScreenShake(Constants.Screenshake.PlayerDeath);
-			Invoke("DieInternal", 0.4f);
+			Invoke(nameof(DieInternal), 0.4f);
+        }
+
+        public void SetVelocityY(float y) {
+            rb.SetVelocityY(y);
         }
 
 		private void DieInternal() {

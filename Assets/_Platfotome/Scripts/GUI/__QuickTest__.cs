@@ -15,7 +15,7 @@ namespace Platfotome.GUI {
 			controls = new InputWrapper();
 			controls.Enable();
 
-			controls.Player.Fire.performed += context => Debug.Log("Fire");
+			//controls.Player.Fire.performed += context => Debug.Log("Fire");
 		}
 
 		private void Start() {
