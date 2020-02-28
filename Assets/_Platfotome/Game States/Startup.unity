@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b56fe5438adb4488cd131146da0c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  c: {fileID: 7400000, guid: d255b2f6194a7c8458a92de9251f8c82, type: 2}
+  camClip: {fileID: 0}
 --- !u!114 &1418057041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 1890999038}
   - component: {fileID: 1890999039}
   - component: {fileID: 1890999040}
+  - component: {fileID: 1890999041}
   m_Layer: 0
   m_Name: Scene Camera
   m_TagString: MainCamera
@@ -704,6 +705,18 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1890999041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890999033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322a5c82a2ebc78499f98a8b91344d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2301952216218447628
 RectTransform:
   m_ObjectHideFlags: 0
