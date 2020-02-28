@@ -8,7 +8,7 @@ namespace Platfotome {
         PlayerController player = null;
         Rigidbody2D rb = null;
 
-        [SerializeField] UnityEvent onStep;
+        [SerializeField] UnityEvent onStep = new UnityEvent();
 
         void Start() {
             player = PlayerController.Instance;
