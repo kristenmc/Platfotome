@@ -1098,7 +1098,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e5fbf6c070152224cbb82fefa0354218, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4224,20 +4224,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 426977829}
     m_ColliderPaths:
-    - - X: -169834992
-        Y: 4999
-      - X: -169834992
-        Y: -99904992
-      - X: 159845008
-        Y: -99904992
-      - X: 159845008
-        Y: 4999
+    - - X: 160000000
+        Y: -100000000
+      - X: 160000000
+        Y: 0
+      - X: -170000000
+        Y: 0
+      - X: -170000000
+        Y: -100000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 15.984472, y: -9.9904995}
-      - {x: 15.984472, y: 0.0004999}
-      - {x: -16.9835, y: 0.0004706}
-      - {x: -16.98347, y: -9.9904995}
+    - - {x: 15.999971, y: -10}
+      - {x: 15.999971, y: 0}
+      - {x: -17, y: -0.000029300001}
+      - {x: -16.999971, y: -10}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &426977828
@@ -4457,6 +4457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa155c968477ab468b61c197bcf39b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
 --- !u!4 &435861063
 Transform:
   m_ObjectHideFlags: 0
@@ -4617,7 +4618,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e5fbf6c070152224cbb82fefa0354218, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9340,7 +9341,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127202679}
   m_Enabled: 1
-  m_CellSize: {x: 0.999, y: 0.999, z: 0}
+  m_CellSize: {x: 1, y: 1, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
