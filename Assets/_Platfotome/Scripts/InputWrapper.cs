@@ -245,6 +245,22 @@ namespace Platfotome
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Panel Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8f6b3ef-e5be-4901-8b2d-5a53482e809e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Panel Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""0bff9ecc-c88d-49c9-a28d-1363a0f6e73d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""682ca95d-bc8f-4dd7-ae49-fca75ce38306"",
@@ -598,6 +614,50 @@ namespace Platfotome
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4744d597-ae03-4625-bf6b-f2dd5aba0f64"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Panel Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7a8f383-d807-4c5b-9318-3bc91651a822"",
+                    ""path"": ""<XboxOneGampadiOS>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Panel Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84267b9f-2c1f-4225-8461-1111fb6dbfa5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Panel Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a82b38f1-0392-4e7c-8ec6-c8cf18428d96"",
+                    ""path"": ""<XboxOneGampadiOS>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Panel Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -641,6 +701,8 @@ namespace Platfotome
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+            m_UI_PanelLeft = m_UI.FindAction("Panel Left", throwIfNotFound: true);
+            m_UI_PanelRight = m_UI.FindAction("Panel Right", throwIfNotFound: true);
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
             m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
             m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
@@ -755,6 +817,8 @@ namespace Platfotome
         private readonly InputActionMap m_UI;
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_Navigate;
+        private readonly InputAction m_UI_PanelLeft;
+        private readonly InputAction m_UI_PanelRight;
         private readonly InputAction m_UI_Submit;
         private readonly InputAction m_UI_Cancel;
         private readonly InputAction m_UI_Point;
@@ -767,6 +831,8 @@ namespace Platfotome
             private @InputWrapper m_Wrapper;
             public UIActions(@InputWrapper wrapper) { m_Wrapper = wrapper; }
             public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+            public InputAction @PanelLeft => m_Wrapper.m_UI_PanelLeft;
+            public InputAction @PanelRight => m_Wrapper.m_UI_PanelRight;
             public InputAction @Submit => m_Wrapper.m_UI_Submit;
             public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
             public InputAction @Point => m_Wrapper.m_UI_Point;
@@ -786,6 +852,12 @@ namespace Platfotome
                     @Navigate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
                     @Navigate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
                     @Navigate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                    @PanelLeft.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPanelLeft;
+                    @PanelLeft.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPanelLeft;
+                    @PanelLeft.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPanelLeft;
+                    @PanelRight.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPanelRight;
+                    @PanelRight.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPanelRight;
+                    @PanelRight.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPanelRight;
                     @Submit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                     @Submit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                     @Submit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
@@ -814,6 +886,12 @@ namespace Platfotome
                     @Navigate.started += instance.OnNavigate;
                     @Navigate.performed += instance.OnNavigate;
                     @Navigate.canceled += instance.OnNavigate;
+                    @PanelLeft.started += instance.OnPanelLeft;
+                    @PanelLeft.performed += instance.OnPanelLeft;
+                    @PanelLeft.canceled += instance.OnPanelLeft;
+                    @PanelRight.started += instance.OnPanelRight;
+                    @PanelRight.performed += instance.OnPanelRight;
+                    @PanelRight.canceled += instance.OnPanelRight;
                     @Submit.started += instance.OnSubmit;
                     @Submit.performed += instance.OnSubmit;
                     @Submit.canceled += instance.OnSubmit;
@@ -867,6 +945,8 @@ namespace Platfotome
         public interface IUIActions
         {
             void OnNavigate(InputAction.CallbackContext context);
+            void OnPanelLeft(InputAction.CallbackContext context);
+            void OnPanelRight(InputAction.CallbackContext context);
             void OnSubmit(InputAction.CallbackContext context);
             void OnCancel(InputAction.CallbackContext context);
             void OnPoint(InputAction.CallbackContext context);

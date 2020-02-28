@@ -16,6 +16,13 @@ namespace Platfotome {
         }
     }
 
+    public class SettingsState : GameState {
+        public SettingsState() :
+            base("Settings", TransitionLibrary.GetTransition(typeof(FadeToBlackTransition)), new TransitionArguments(0.3f, 0.2f, 0.3f)) {
+            AllowPause = false;
+        }
+    }
+
     public class CreditsState : GameState {
         public CreditsState() :
             base("Credits", TransitionLibrary.GetTransition(typeof(FadeToBlackTransition)), new TransitionArguments(0.3f, 0.2f, 0.3f)) {

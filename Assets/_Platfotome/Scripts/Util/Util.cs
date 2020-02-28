@@ -35,10 +35,23 @@ namespace Platfotome {
 		public static Vector2 GetXY(this Vector3 vector3) => new Vector2(vector3.x, vector3.y);
 
 		/// <summary>
+		/// Loop an int between [min, max)
+		/// </summary>
+		public static int Loop(int value, int min, int max) {
+			if (min == max) throw new ArgumentException("Min and max cannot be equal");
+			while (value < min) value += max - min;
+			while (value >= max) value -= max - min;
+			return value;
+		}
+
+		/// <summary>
 		/// Loop a float between [min, max]
 		/// </summary>
 		public static float Loop(float value, float min, float max) {
-			return (value - min) % (max - min) + min;
+			if (min == max) throw new ArgumentException("Min and max cannot be equal");
+			while (value < min) value += max - min;
+			while (value >= max) value -= max - min;
+			return value;
 		}
 
 		/// <summary>
@@ -48,6 +61,9 @@ namespace Platfotome {
 			return new Vector2(Loop(value.x, min.x, max.x), Loop(value.y, min.y, max.y));
 		}
 
+		/// <summary>
+		/// Get a color from a hex string in the format #RRGGBB
+		/// </summary>
 		public static Color FromHex(string hex) {
 			hex = hex.TrimStart('#');
 			return new Color(
@@ -56,11 +72,17 @@ namespace Platfotome {
 				int.Parse(hex.Substring(4, 2), NumberStyles.HexNumber) / 255f);
 		}
 
+		/// <summary>
+		/// Set the alpha value of a color.
+		/// </summary>
 		public static Color SetAlpha(Color color, float amount) {
 			color.a = amount;
 			return color;
 		}
 
+		/// <summary>
+		/// Set the alpha value of a color.
+		/// </summary>
 		public static void SetAlpha(ref Color color, float amount) {
 			color.a = amount;
 		}

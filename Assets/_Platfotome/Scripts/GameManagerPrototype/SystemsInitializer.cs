@@ -18,6 +18,9 @@ namespace Platfotome {
 			DialogueManager.Initialize();
 			TransitionLibrary.Initialize();
 
+			// TODO @Conan: Dynamic binding
+			GameConfig.Current = GameConfig.GetDefault();
+
 			initialized = true;
 		}
 

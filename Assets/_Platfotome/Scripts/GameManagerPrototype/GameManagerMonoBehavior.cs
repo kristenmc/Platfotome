@@ -20,6 +20,7 @@ namespace Platfotome {
 			if (Input.GetKeyDown(KeyCode.Alpha3)) GameManager.RequestStateTransition(new ChoiceWorldState("ChoiceWorld"));
 			if (Input.GetKeyDown(KeyCode.Alpha4)) GameManager.RequestStateTransition(new MainMenuState());
 			if (Input.GetKeyDown(KeyCode.Alpha5)) GameManager.RequestStateTransition(new ChoiceWorldState("ChoiceWorld_Demo"));
+			if (Input.GetKeyDown(KeyCode.Alpha8)) GameManager.RequestStateTransition(new SettingsState());
 			if (Input.GetKeyDown(KeyCode.Alpha9)) GameManager.RequestStateTransition(new CreditsState());
 
 			if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.BackQuote)) {
