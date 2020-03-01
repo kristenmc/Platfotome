@@ -29,18 +29,19 @@ namespace Platfotome.GUI {
 				enabled = false;
 				return;
 			}
-
-			SelectedIndex = 0;
-
 		}
 
-		private void Update() {
+        private void Start() {
+            SelectedIndex = 0;
+        }
+
+        private void Update() {
 
 			if (Input.GetKeyDown(KeyCode.UpArrow)) {
-				++SelectedIndex;
+				--SelectedIndex;
 			}
 			if (Input.GetKeyDown(KeyCode.DownArrow)) {
-				--SelectedIndex;
+				++SelectedIndex;
 			}
 
 

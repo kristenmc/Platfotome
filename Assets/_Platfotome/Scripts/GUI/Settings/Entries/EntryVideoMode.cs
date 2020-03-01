@@ -24,6 +24,7 @@ namespace Platfotome.GUI {
 		}
 
 		protected override void OnEdit(bool current) {
+            Screen.fullScreen = current;
 			Debug.Log($"{GetType().Name} {current}");
 		}
 	}

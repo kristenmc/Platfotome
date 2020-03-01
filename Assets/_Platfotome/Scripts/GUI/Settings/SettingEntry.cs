@@ -13,6 +13,11 @@ namespace Platfotome.GUI {
 
 		private TextMeshEditField left, right;
 
+        /// <summary>
+        /// Whether a setting value should be continuously updated.
+        /// </summary>
+        [SerializeField] bool continuousUpdate = false;
+
 		/// <summary>
 		/// The value of this entry.
 		/// </summary>
@@ -22,6 +27,7 @@ namespace Platfotome.GUI {
 				writeBinding(value);
 				RightText = GetValueString(value);
 				OnEdit(value);
+                GameConfigManager.Instance.Save();
 			}
 		}
 
@@ -100,6 +106,11 @@ namespace Platfotome.GUI {
 
 		public override string ToString() => $"{GetType().Name}<{typeof(T).Name}>({EntryValue})";
 
+        void Update() {
+            if (continuousUpdate) {
+                RightText = GetValueString(readBinding());
+            }
+        }
 	}
 
 }

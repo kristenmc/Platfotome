@@ -7,7 +7,7 @@ namespace Platfotome.GUI {
 	public class EntryVideoScale : SettingEntry<float> {
 
 		public EntryVideoScale() :
-			base(() => GameConfig.Current.scale, x => GameConfig.Current.scale = x) {
+			base(() => Mathf.Min(Screen.width / GameConfig.baseResolution.x, Screen.height / GameConfig.baseResolution.y), x => GameConfig.Current.scale = x) {
 		}
 
 		protected override float GetNext(float current) {
@@ -27,6 +27,7 @@ namespace Platfotome.GUI {
 		}
 
 		protected override void OnEdit(float current) {
+            Screen.SetResolution(Mathf.RoundToInt(GameConfig.baseResolution.x * current), Mathf.RoundToInt(GameConfig.baseResolution.y * current), GameConfig.Current.fullscreen);
 			Debug.Log($"{GetType().Name} {current}");
 		}
 	}

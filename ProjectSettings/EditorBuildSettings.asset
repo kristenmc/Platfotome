@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Platfotome/Game States/ChoiceWorld_Demo.unity
     guid: ed8ad8e0d157127468327591ac94869b
+  - enabled: 1
+    path: Assets/_Platfotome/Game States/Settings.unity
+    guid: de90376800a4bcc45a0d2cf87bd08156
   m_configObjects: {}
