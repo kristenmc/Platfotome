@@ -16,7 +16,7 @@ namespace Platfotome.GUI {
         /// <summary>
         /// Whether a setting value should be continuously updated.
         /// </summary>
-        [SerializeField] bool continuousUpdate = false;
+        [SerializeField] protected bool continuousUpdate = false;
 
 		/// <summary>
 		/// The value of this entry.
@@ -48,9 +48,9 @@ namespace Platfotome.GUI {
 		}
 
 		private readonly Func<T> readBinding;
-		private readonly Func<T, T> writeBinding;
+		private readonly Action<T> writeBinding;
 
-		protected SettingEntry(Func<T> readBinding, Func<T, T> writeBinding) {
+		protected SettingEntry(Func<T> readBinding, Action<T> writeBinding) {
 			this.readBinding = readBinding;
 			this.writeBinding = writeBinding;
 		}

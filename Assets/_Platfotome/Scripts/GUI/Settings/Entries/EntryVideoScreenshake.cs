@@ -4,25 +4,25 @@ using UnityEngine;
 
 namespace Platfotome.GUI {
 
-	public class EntryVideoScreenshake : SettingEntry<int> {
+	public class EntryVideoScreenshake : SettingEntry<float> {
 
 		public EntryVideoScreenshake() :
 			base(() => GameConfig.Current.screenshake, x => GameConfig.Current.screenshake = x) {
 		}
 
-		protected override int GetNext(int current) {
-			return Mathf.Min(current + 50, 100);
+		protected override float GetNext(float current) {
+			return Mathf.Min(current + 0.5f, 1f);
 		}
 
-		protected override int GetPrevious(int current) {
-			return Mathf.Max(current - 50, 0);
+		protected override float GetPrevious(float current) {
+			return Mathf.Max(current - 0.5f, 0);
 		}
 
-		protected override string GetValueString(int current) {
-            return $"{current}%";
+		protected override string GetValueString(float current) {
+            return $"{100 * current}%";
 		}
 
-		protected override void OnEdit(int current) {
+		protected override void OnEdit(float current) {
 			Debug.Log($"{GetType().Name} {current}");
 		}
 	}

@@ -25,9 +25,7 @@ namespace Platfotome {
 
 			if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.BackQuote)) {
 				Debug.Log(GameManager.LogName + " Resetting preferences to factory default.");
-				GamePreferences.ResetToFactory();
-				Debug.Log(GamePreferences.ToStringAll());
-				GamePreferences.Apply();
+				GameConfig.Current = GameConfig.GetDefault();
 			}
 
 			GameManager.Update();

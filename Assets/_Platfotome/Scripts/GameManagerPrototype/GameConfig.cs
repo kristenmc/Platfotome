@@ -12,7 +12,7 @@ namespace Platfotome {
 
 		public const int MaxScale = 6;
 		public const int MinScale = 2;
-        public static readonly Vector2 baseResolution = new Vector2(320, 180);
+        public static readonly Vector2 BaseResolution = new Vector2(320, 180);
 
 		/// <summary>
 		/// Return the currently active game config.
@@ -24,12 +24,11 @@ namespace Platfotome {
 		/// <summary>
 		/// Create a new GameConfig with default configuration values.
 		/// </summary>
-		/// <returns></returns>
 		public static GameConfig GetDefault() {
             return new GameConfig() {
                 fullscreen = true,
                 scale = 6,
-                screenshake = 100,
+                screenshake = 1,
 
                 volumeMaster = 10,
                 volumeMusic = 10,
@@ -41,7 +40,7 @@ namespace Platfotome {
 
 		public bool fullscreen;
 		public float scale;
-        public int screenshake;
+        public float screenshake;
 
         public int volumeMaster;
         public int volumeMusic;

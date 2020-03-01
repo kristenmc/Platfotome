@@ -6,14 +6,7 @@ namespace Platfotome {
 	[Serializable]
 	public class ScreenShakeTool {
 
-		/// <summary>
-		/// Scales all screenshake amounts. Set to 0 to disable screenshake entirely.
-		/// </summary>
-		public static float GlobalScreenshakeFactor { get; set; }
-
-		static ScreenShakeTool() {
-			GamePreferences.OnApply += () => GlobalScreenshakeFactor = PlayerPrefs.GetFloat(GamePreferences.Key.Screenshake);
-		}
+		public static float GlobalScreenshakeFactor => GameConfig.Current.screenshake;
 
 		public Vector2 Offset { get; private set; }
 

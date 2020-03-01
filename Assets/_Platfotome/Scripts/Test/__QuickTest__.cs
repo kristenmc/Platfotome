@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Platfotome.GUI {
+namespace Platfotome {
 
 	public class __QuickTest__ : MonoBehaviour {
 
@@ -22,8 +22,6 @@ namespace Platfotome.GUI {
 
 		}
 
-		float val;
-
 		private void Update() {
 
 			if (Input.GetKeyDown(KeyCode.Keypad1)) HealthDisplay.Instance.SetHealth(0);
@@ -31,18 +29,6 @@ namespace Platfotome.GUI {
 			if (Input.GetKeyDown(KeyCode.Keypad3)) HealthDisplay.Instance.SetHealth(2);
 			if (Input.GetKeyDown(KeyCode.Keypad4)) HealthDisplay.Instance.SetHealth(3);
 			if (Input.GetKeyDown(KeyCode.Keypad5)) HealthDisplay.Instance.SetHealth(4);
-
-			if (Input.GetKeyDown(KeyCode.Keypad8)) {
-				Debug.Log("Disabling screenshake");
-				PlayerPrefs.SetFloat(GamePreferences.Key.Screenshake, 0f);
-				GamePreferences.Apply();
-			}
-			if (Input.GetKeyDown(KeyCode.Keypad9)) {
-				Debug.Log("Enabling screenshake");
-				PlayerPrefs.SetFloat(GamePreferences.Key.Screenshake, 1f);
-				GamePreferences.Apply();
-			}
-
 
 			if (GameManager.InGameState(typeof(OverworldState))) {
 
